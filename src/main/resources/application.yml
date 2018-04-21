@@ -1,0 +1,36 @@
+server:
+  port: 8084
+
+
+spring:
+  datasource:
+    name: mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/programs?useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: 1122
+
+  mybatis:
+    type-aliases-package: com.wp.weipu.entity
+    mapper-locations: classpath:mapper/**/*.xml
+    base-package: com.wp.weipu.mapper
+
+
+
+ #默认配置
+    druid:
+      filters: stat
+      max-active: 20
+      initial-size: 1
+      max-wait: 30000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: false
+      max-open-prepared-statements: -1
+      remove-abandoned: true
+      remove-abandoned-timeout: 180
+      web-stat-filter-exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*,/download/*,/wj/*,/assets/*'

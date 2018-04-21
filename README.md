@@ -117,8 +117,10 @@ Ubuntu安装之后的文件结构大致为：
 并已经在/etc/init.d/下创建了启动脚本nginx
 默认的虚拟主机的目录设置在了/var/www/nginx-default (有的版本 默认的虚拟主机的目录设置在了/var/www, 请参考/etc/nginx/sites-available里的配置)
 
+apache的默认文档根目录是在ubuntu上的/var/www目录 ,配置文件是/ etc/apache2/apache2.conf。配置存储在的子目录在/etc/apache2目录。
 
+apt-get install php7.0 libapache2-mod-php7.0
 
-
+/etc/init.d/apache2 restart
 
 
