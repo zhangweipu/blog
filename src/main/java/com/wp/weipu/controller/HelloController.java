@@ -1,6 +1,6 @@
 package com.wp.weipu.controller;
 
-import com.wp.weipu.common.Result;
+import com.wp.weipu.common.ResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,17 +15,17 @@ public class HelloController {
     private static final Logger logger= LoggerFactory.getLogger(HelloController.class);
 
     @PostMapping("/hello")
-    public Result hello(){
-        return new Result("ssss");
+    public ResultBean hello(){
+        return new ResultBean("ssss");
     }
 
     @PostMapping("/admin/api/test")
-    public Result test(){
-        return new Result("success");
+    public ResultBean test(){
+        return new ResultBean("success");
     }
 
     @GetMapping(value = "/security/test")
-    public Result security(){
-        return new Result("aa");
+    public ResultBean security(){
+        return new ResultBean("aa");
     }
 }
