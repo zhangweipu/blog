@@ -34,3 +34,13 @@ spring:
       remove-abandoned: true
       remove-abandoned-timeout: 180
       web-stat-filter-exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*,/download/*,/wj/*,/assets/*'
+
+
+    thymeleaf:
+       cache: false
+       prefix: classpath:/templates/
+       suffix: .html
+       encoding: UTF-8
+       mode: HTML5
+       servlet:
+         content-type: text/html

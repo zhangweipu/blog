@@ -3,6 +3,8 @@ package com.wp.weipu.controller;
 import com.wp.weipu.common.ResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author zwp
  */
-@RestController
+@Controller
 public class HelloController {
     private static final Logger logger= LoggerFactory.getLogger(HelloController.class);
 
-    @PostMapping("/hello")
-    public ResultBean hello(){
-        return new ResultBean("ssss");
+    @GetMapping("/hello")
+    public String hello(Model model){
+        model.addAttribute("test","hello world");
+        return "index/index";
     }
 
     @PostMapping("/admin/api/test")
