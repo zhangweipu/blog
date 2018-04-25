@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
     private static final Logger logger= LoggerFactory.getLogger(HelloController.class);
 
+    @GetMapping("/hello2")
+    public String hello2(){
+        return "index/hello2";
+    }
+
     @GetMapping("/hello")
     public String hello(Model model){
         model.addAttribute("test","hello world");
