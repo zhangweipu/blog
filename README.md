@@ -123,4 +123,16 @@ apt-get install php7.0 libapache2-mod-php7.0
 
 /etc/init.d/apache2 restart
 
+正则表达式
+^one 匹配one开头的  ^one$  匹配one 无效的不知道为啥
+
+
+python
+
+list 用[] tup 用() set{}
+
+
+
+
+
 

@@ -16,7 +16,7 @@ public class FileUtil {
      * 读取文件内容，将其转化成String
      *
      * @param file 读取文件
-     * @return
+     * @return sb 字符串
      */
     public static String readFile(File file) {
         //使用于单线程
