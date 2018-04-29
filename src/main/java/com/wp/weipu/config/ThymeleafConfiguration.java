@@ -13,14 +13,14 @@ public class ThymeleafConfiguration {
     @SuppressWarnings("unused")
     private final Logger log = LoggerFactory.getLogger(ThymeleafConfiguration.class);
 
-//    @Bean
-//    public ClassLoaderTemplateResolver emailTemplateResolver() {
-//        ClassLoaderTemplateResolver emailTemplateResolver = new ClassLoaderTemplateResolver();
-//        emailTemplateResolver.setPrefix("templates/mails/");
-//        emailTemplateResolver.setSuffix(".html");
-//        emailTemplateResolver.setTemplateMode("HTML5");
-//        emailTemplateResolver.setCharacterEncoding(CharEncoding.UTF_8);
-//        emailTemplateResolver.setOrder(1);
-//        return emailTemplateResolver;
-//    }
+    @Bean
+    public ClassLoaderTemplateResolver emailTemplateResolver() {
+        ClassLoaderTemplateResolver TemplateResolver = new ClassLoaderTemplateResolver();
+        TemplateResolver.setPrefix("/templates/");
+        TemplateResolver.setSuffix(".html");
+        TemplateResolver.setTemplateMode("HTML5");
+        TemplateResolver.setCharacterEncoding(CharEncoding.UTF_8);
+        TemplateResolver.setOrder(1);
+        return TemplateResolver;
+    }
 }

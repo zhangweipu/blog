@@ -25,7 +25,7 @@ public class HelloController {
     @GetMapping("/hello")
     public String hello(Model model){
         model.addAttribute("test","hello world");
-        return "index/index";
+        return "/index";
     }
 
     @ResponseBody
