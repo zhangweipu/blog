@@ -106,6 +106,10 @@ npm run build
 
 cnpm run dev
 
+npm i axios
+
+npm install --save axios vue-axios
+
 start nginx
 
 sudo apt-get install nginx
