@@ -12,9 +12,9 @@
         <property name="javaFileEncoding" value="UTF-8"/>
         <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
 
-        <!--<plugin type="tk.mybatis.mapper.generator.MapperPlugin">-->
-            <!--<property name="mappers" value="com.longfor.drogon.common.mybatis.LFMapper"/>-->
-        <!--</plugin>-->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.wp.weipu.common.base.BaseMapper"/>
+        </plugin>
 
         <commentGenerator>
             <property name="suppressDate" value="true"/>

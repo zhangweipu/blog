@@ -1,6 +1,5 @@
 package com.wp.weipu.test;
 
-import com.rabbitmq.client.UnblockedCallback;
 import org.junit.Test;
 
 import java.util.Arrays;

@@ -1,5 +1,5 @@
 server:
-  port: 8084
+  port: 8086
 
 
 spring:
@@ -45,10 +45,10 @@ spring:
        servlet:
          content-type: text/html
 
-sftp :
-  username : root
-  password : pass123!@#
-  host : 192.168.36.213
-  port : 22
-  #文件上传下载的根目录(指定上传下载的文件根目录)
-  home : /lhdata
+#sftp :
+#  username : root
+#  password : pass123!@#
+#  host : 192.168.36.213
+#  port : 22
+#  #文件上传下载的根目录(指定上传下载的文件根目录)
+#  home : /lhdata

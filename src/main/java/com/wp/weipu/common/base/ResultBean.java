@@ -1,4 +1,4 @@
-package com.wp.weipu.common;
+package com.wp.weipu.common.base;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
