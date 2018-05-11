@@ -130,10 +130,29 @@ apt-get install php7.0 libapache2-mod-php7.0
 正则表达式
 ^one 匹配one开头的  ^one$  匹配one 无效的不知道为啥
 
+solr环境的搭建：：
+下载解压：solr
+
 
 python
 
 list 用[] tup 用() set{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

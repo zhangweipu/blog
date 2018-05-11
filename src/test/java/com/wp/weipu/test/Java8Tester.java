@@ -46,6 +46,8 @@ public class Java8Tester {
     }
 
     public static void eval2(List<Integer> list, UnaryOperator<Integer> unaryOperator){
+
+
         for (Integer n:list){
             //返回一个对象
             if (unaryOperator.equals(n)){

@@ -30,7 +30,8 @@ public class HelloController {
     @ResponseBody
     @PostMapping("/admin/api/test")
     public ResultBean test(){
-        return new ResultBean("success");
+        String path = this.getClass().getResource("").getPath().toString();
+        return new ResultBean("success" + path);
     }
 
     @GetMapping(value = "/security/test")
