@@ -38,7 +38,7 @@
         <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}"
                              type="XMLMAPPER"/>
 
-        <table tableName="articles" domainObjectName="Article" enableCountByExample="false" enableUpdateByExample="false"
+        <table tableName="city" domainObjectName="City" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"/>
         <!--<table tableName="demo_account" domainObjectName="DemoAccount" enableCountByExample="false" enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"/>-->
