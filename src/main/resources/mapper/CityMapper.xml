@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.weipu.mapper.CityMapper">
+  <resultMap id="BaseResultMap" type="com.wp.weipu.entity.City">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="DSC" jdbcType="VARCHAR" property="dsc" />
+    <result column="PID" jdbcType="VARCHAR" property="pid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    ID, DSC, PID
+  </sql>
+</mapper>
