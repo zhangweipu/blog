@@ -1,0 +1,15 @@
+2018-05-13 17:18:32 [restartedMain] INFO  com.wp.weipu.WeipuApplication : 
+ Starting WeipuApplication on DESKTOP-A4IO8QL with PID 11708 (G:\study\weipu\target\classes started by zhang in G:\study\weipu) 
+2018-05-13 17:18:32 [restartedMain] DEBUG com.wp.weipu.WeipuApplication : 
+ Running with Spring Boot v2.0.1.RELEASE, Spring v5.0.5.RELEASE 
+2018-05-13 17:18:32 [restartedMain] INFO  com.wp.weipu.WeipuApplication : 
+ No active profile set, falling back to default profiles: default 
+2018-05-13 17:18:47 [restartedMain] INFO  com.wp.weipu.WeipuApplication : 
+ Started WeipuApplication in 17.031 seconds (JVM running for 20.748) 
+2018-05-13 17:18:47 [restartedMain] INFO  com.wp.weipu.WeipuApplication : 
+ 
+--------------------------------------------
+|                                            |
+|      spring boot start                     |
+|                                            |
+--------------------------------------------- 

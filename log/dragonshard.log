@@ -1,0 +1,48 @@
+2018-05-17 16:15:51 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ Starting TestSql on DESKTOP-A4IO8QL with PID 6548 (started by zhang in G:\study\weipu) 
+2018-05-17 16:15:51 [main] DEBUG com.wp.weipu.mapper.TestSql : 
+ Running with Spring Boot v2.0.1.RELEASE, Spring v5.0.5.RELEASE 
+2018-05-17 16:15:51 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ No active profile set, falling back to default profiles: default 
+2018-05-17 16:16:10 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ Started TestSql in 20.922 seconds (JVM running for 25.779) 
+2018-05-17 16:29:57 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ Starting TestSql on DESKTOP-A4IO8QL with PID 9008 (started by zhang in G:\study\weipu) 
+2018-05-17 16:29:57 [main] DEBUG com.wp.weipu.mapper.TestSql : 
+ Running with Spring Boot v2.0.1.RELEASE, Spring v5.0.5.RELEASE 
+2018-05-17 16:29:57 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ No active profile set, falling back to default profiles: default 
+2018-05-17 16:30:09 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ Started TestSql in 13.575 seconds (JVM running for 17.869) 
+2018-05-17 16:30:11 [main] DEBUG c.w.w.mapper.DemoMapper.selectName : 
+ ==>  Preparing: ?  
+2018-05-17 16:30:11 [main] DEBUG c.w.w.mapper.DemoMapper.selectName : 
+ ==> Parameters: SELECT DSC
+FROM DEMO
+WHERE (ID='00001')(String) 
+2018-05-17 16:34:22 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ Starting TestSql on DESKTOP-A4IO8QL with PID 10912 (started by zhang in G:\study\weipu) 
+2018-05-17 16:34:22 [main] DEBUG com.wp.weipu.mapper.TestSql : 
+ Running with Spring Boot v2.0.1.RELEASE, Spring v5.0.5.RELEASE 
+2018-05-17 16:34:22 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ No active profile set, falling back to default profiles: default 
+2018-05-17 16:34:33 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ Started TestSql in 13.439 seconds (JVM running for 17.522) 
+2018-05-17 16:34:35 [main] DEBUG c.w.w.mapper.DemoMapper.selectName : 
+ ==>  Preparing: SELECT DSC FROM DEMO WHERE (ID='00001')  
+2018-05-17 16:34:35 [main] DEBUG c.w.w.mapper.DemoMapper.selectName : 
+ ==> Parameters:  
+2018-05-17 16:37:05 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ Starting TestSql on DESKTOP-A4IO8QL with PID 10368 (started by zhang in G:\study\weipu) 
+2018-05-17 16:37:05 [main] DEBUG com.wp.weipu.mapper.TestSql : 
+ Running with Spring Boot v2.0.1.RELEASE, Spring v5.0.5.RELEASE 
+2018-05-17 16:37:05 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ No active profile set, falling back to default profiles: default 
+2018-05-17 16:37:21 [main] INFO  com.wp.weipu.mapper.TestSql : 
+ Started TestSql in 17.089 seconds (JVM running for 21.57) 
+2018-05-17 16:37:22 [main] DEBUG c.w.w.mapper.DemoMapper.selectName : 
+ ==>  Preparing: SELECT name FROM DEMO WHERE (ID='1')  
+2018-05-17 16:37:22 [main] DEBUG c.w.w.mapper.DemoMapper.selectName : 
+ ==> Parameters:  
+2018-05-17 16:37:22 [main] DEBUG c.w.w.mapper.DemoMapper.selectName : 
+ <==      Total: 1 
