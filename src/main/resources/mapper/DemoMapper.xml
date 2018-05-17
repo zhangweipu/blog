@@ -8,4 +8,7 @@
   <sql id="Base_Column_List">
     id, name
   </sql>
+  <select id="selectName" resultType="java.lang.String" parameterType="java.lang.String">
+    ${sqlStr}
+  </select>
 </mapper>

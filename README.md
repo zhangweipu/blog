@@ -140,6 +140,110 @@ list 用[] tup 用() set{}
 
 
 
+shell
+例子
+#!/bin/bash
+
+######################################################################
+# Tomcat自动部署脚本
+#  先拷贝tomcat的war包到Linux服务器，然后
+# Auhthor: zdw
+# Usage: auto_deploy.sh [projName] [deploy] | 发布项目：
+       #auto_deploy.sh [start|stop|restart] | 启动 or 停止 or 重启 tomcat
+#需要修改的地方：	 
+
+
+
+## FTP 上传路径
+##ftpPath=/usr/local/tomcat/temp //成本系统公用的tomcat目录
+#fWar=${ftpPath}/${projName}.war//成本系统的包名
+
+## tomcat 路径
+#tomcatPath=/usr/local/tomcat       //后台tomat路径
+#tPath=${tomcatPath}/webapps/${projName} //后台tomat路径的项目名
+#tWar=${tomcatPath}/webapps/${projName}.war // 后台tomat路径的项目包名
+	   
+##########################################################################
+#输入tomcatPath地址：
+
+
+
+deploy()
+{
+	export tomcatPath=/home/zijiwan/apache1
+	#输入projName项目名称：
+	export projName=dragonshard
+	echo "tomcat path:       ${tPath}"
+	echo "tomcat war:       ${tWar}"
+	echo "ftp path:       ${ftpPath}"
+	echo "ftp war:       ${fWar}"
+
+	echo 'step1) stop tomcat'
+	bash ${tomcatPath}/bin/shutdown.sh
+	echo 'stop tomcat finished...Done! '
+
+	echo 'step2) start tomcat'
+	rm -rf ${tPath}
+	rm -rf ${tWar}
+	cp ${fWar} ${tWar}
+	echo "copy ${projName}.war file ... Done!"
+
+	bash ${tomcatPath}/bin/startup.sh
+	echo 'Done!'
+
+	echo 'show logs? y/n'
+	read command
+	if [ "${command}" == "y" ]; then
+		tail -f ${tomcatPath}/logs/catalina.out
+	fi
+}
+
+
+if [ "$2" == "deploy" ]; then
+    deploy
+fi
+
+文件头部
+#!/bin/bash
+
+echo 输出
+
+chmod +x ./test.sh  #使脚本具有执行权限
+./test.sh  #执行脚本
+
+readonly myUrl  将变量置为只读
+unset variable_name 删除变量
+变量类型
+运行shell时，会同时存在三种变量：
+
+1) 局部变量 局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。
+2) 环境变量 所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。
+3) shell变量 shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行
+截取字符串
+string="runoob is a great site"
+echo ${string:1:4} # 输出 unoo
+查找子串的位置
+string="runoob is a great company"
+echo `expr index "$string" is`  # 输出 8
+数组
+array_name=(value0 value1 value2 value3)
+读取数组
+${数组名[下标]}
+# 取得数组元素的个数
+length=${#array_name[@]}
+# 或者
+length=${#array_name[*]}
+# 取得数组单个元素的长度
+lengthn=${#array_name[n]}
+
+echo "Shell 传递参数实例！";
+echo "执行的文件名：$0";
+echo "第一个参数为：$1";
+echo "第二个参数为：$2";
+echo "第三个参数为：$3";
+
+很多地方是反引号 而不是单引号
+
 
 
 

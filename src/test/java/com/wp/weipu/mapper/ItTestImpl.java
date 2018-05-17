@@ -38,4 +38,9 @@ public class ItTestImpl {
         System.out.println(s);
     }
 
+    @Test
+    public void insertTest(){
+
+    }
+
 }
