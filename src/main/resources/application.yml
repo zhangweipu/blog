@@ -1,5 +1,5 @@
 server:
-  port: 8086
+  port: 8080
 
 
 spring:
@@ -46,9 +46,9 @@ spring:
          content-type: text/html
 
 #sftp :
-#  username : root
-#  password : pass123!@#
-#  host : 192.168.36.213
+#  username : zwp
+#  password : 1122
+#  host : 192.168.73.128
 #  port : 22
 #  #文件上传下载的根目录(指定上传下载的文件根目录)
-#  home : /lhdata
+#  home : /
