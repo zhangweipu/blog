@@ -26,5 +26,5 @@
 /.mvn/
 mvnw
 mvnw.cmd
-/log
+/log/
 /test
