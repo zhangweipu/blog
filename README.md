@@ -245,6 +245,10 @@ echo "第三个参数为：$3";
 很多地方是反引号 而不是单引号
 
 
+git config --global merge.ours.driver true  
+echo 'email.json merge=ours' >> .gitattributes  
+
+
 
 
 
