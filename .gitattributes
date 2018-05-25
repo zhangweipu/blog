@@ -1,2 +1,3 @@
 application.yml merge=ours
-application.yml rebase=ours
+
+
