@@ -3,6 +3,7 @@ package com.wp.weipu.test;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.DoubleSummaryStatistics;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.function.Predicate;
@@ -97,11 +98,13 @@ public class Lambda implements ILambda {
         //两个条件
         Predicate<String> startWithJ = (n) -> n.startsWith("j");
         Predicate<String> fourLong = (n) -> n.length() == 4;
+        Predicate<String> reg=(n)->n.split("")!=null;
         //开始过滤
         List<String> names = Arrays.asList("java", "python", "c++", "scala", "c", "php");
         names.stream()
                 .filter(startWithJ.and(fourLong))
                 .forEach(name -> System.out.println(name));
+
     }
 
     /**
@@ -146,6 +149,10 @@ public class Lambda implements ILambda {
                 .map(i->i*i)
                 .distinct()
                 .collect(Collectors.toList());
+        Integer num=numbers.stream()
+                .map(j->j+1)
+                .reduce((sum,i)->sum+i)
+                .get();
         System.out.println(dis);
     }
 
@@ -161,6 +168,14 @@ public class Lambda implements ILambda {
                 .summaryStatistics();
         System.out.println("平均："+stats.getAverage());
         System.out.println("max:"+stats.getMax());
+        System.out.println("min"+stats.getSum());
+
+        List<Double> num=Arrays.asList(1.22,2.33,4.44);
+        DoubleSummaryStatistics statistics=num.stream()
+                .mapToDouble((X)->X)
+                .summaryStatistics();
+        System.out.println(statistics.getAverage());
+        System.out.println(statistics.getSum());
     }
 
 }
