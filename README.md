@@ -71,6 +71,60 @@ npm config set prefix "D:\vueProject\nodejs\node_global"
 三、基于 Node.js 安装cnpm（淘宝镜像）
 
 npm install -g cnpm --registry=https://registry.npm.taobao.org
+//node
+如果出现以下错误：
+npm err! Error: connect ECONNREFUSED 127.0.0.1:8087 
+解决办法为：
+$ npm config set proxy null
+
+卸载模块
+我们可以使用以下命令来卸载 Node.js 模块。
+$ npm uninstall express
+卸载后，你可以到 /node_modules/ 目录下查看包是否还存在，或者使用以下命令查看：
+$ npm ls
+
+查看安装模块
+ npm list -g
+npm install express          # 本地安装
+npm install express -g   # 全局安装 多了一个-g
+升级nodejs
+npm install npm -g
+npm install -g nodemon
+数据库
+#以PostgreSql为例
+npm install mysql --save
+sudo npm install knex --save
+sudo npm install pg --save
+
+模块
+fs 文件的操作
+events 模块，并通过实例化 EventEmitter 类来绑定和监听事件
+Stream(流)
+管道流 readerStream.pipe(writerStream);
+链式流 fs.createReadStream('input.txt')
+      .pipe(zlib.createGzip())
+      .pipe(fs.createWriteStream('input.txt.gz'))
+压缩文件
+模块
+module.exports = function() {
+  // ...
+}
+
+路由：router  serve 
+http.createServe(){
+}等操作
+
+定义了一个 Buffer 类，该类用来创建一个专门存放二进制数据的缓存区。
+
+回掉 function 就是最后的一个参数 就是回掉函数 是吧
+例子：fs.readFile('input.txt', function (err, data) {
+    if (err) return console.error(err);
+    console.log(data.toString());
+});
+//koa 路由相关
+有全局和非全局之分
+npm install koa -g
+//node
 四、设置环境变量（非常重要）
 
 五、安装Vue
@@ -243,6 +297,10 @@ echo "第二个参数为：$2";
 echo "第三个参数为：$3";
 
 很多地方是反引号 而不是单引号
+
+
+git config --global merge.ours.driver true  
+echo 'email.json merge=ours' >> .gitattributes  
 
 
 
