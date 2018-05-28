@@ -1,1 +1,1 @@
-application.yml merge=ours
+application.yml,.gitattributes merge=ours
