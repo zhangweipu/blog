@@ -17,6 +17,6 @@ public class UUIDTest {
 
     public static void main(String[] args) {
         String str= String.valueOf(UUID.randomUUID());
-        System.out.println(str);
+        System.out.println("29fa7a73-b5a2-4876-82ea-2518fc34eedd".length());
     }
 }

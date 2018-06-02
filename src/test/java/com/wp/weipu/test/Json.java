@@ -22,4 +22,8 @@ public class Json {
         JSONObject jsonObject = JSONObject.parseObject(str);
         System.out.println(d.toString());
     }
+
+    public String getStr(){
+        return "str";
+    }
 }

@@ -1,5 +1,7 @@
 package com.wp.weipu.test;
 
+import org.springframework.util.StringUtils;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.function.BiConsumer;
@@ -69,4 +71,13 @@ public class Test {
 //            iterator.remove();
 //        }
     }
+
+
+    @org.junit.Test
+    public void test2(){
+        Demo demo=new Demo();
+        StringUtils.isEmpty(demo.getJson().getStr());
+    }
+
+
 }
