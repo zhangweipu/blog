@@ -166,6 +166,14 @@ npm install --save axios vue-axios
 
 start nginx
 
+点击按钮跳转
+this.$router.go('/login');//其中login是你定义的一个路由模块 会刷新
+$router.push({path:'/index'});
+methods:{
+  clickFn:function(){
+    this.$router.push({path:'/index'});
+}
+
 sudo apt-get install nginx
 sudo /etc/init.d/nginx start
 Ubuntu安装之后的文件结构大致为：
@@ -302,7 +310,14 @@ echo "第三个参数为：$3";
 git config --global merge.ours.driver true  
 echo 'email.json merge=ours' >> .gitattributes  
 
-
+//跨域
+ String origin =request.getHeader("Origin");
+            response.setHeader("Access-Control-Allow-Origin", origin);
+            response.setHeader("Access-Control-Allow-Methods", "*");
+            response.setHeader("Access-Control-Allow-Headers","Origin,Content-Type,Accept,token,X-Requested-With");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setContentType("text/html; charset=UTF-8");
+            response.getWriter().write("{\"code\":\"0\",\"data\":\"\",\"msg\":\"该用户无权限\"}");
 
 
 

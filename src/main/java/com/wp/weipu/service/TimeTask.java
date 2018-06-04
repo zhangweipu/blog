@@ -16,8 +16,9 @@ public class TimeTask {
 
     /**
      * 时间表达式
+     *
      */
-    @Scheduled(cron = "0 0 0 0 0 0")
+    @Scheduled(cron = "0 0 0 * * *")
     public void test(){
 
     }
