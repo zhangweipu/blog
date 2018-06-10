@@ -318,6 +318,22 @@ echo 'email.json merge=ours' >> .gitattributes
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setContentType("text/html; charset=UTF-8");
             response.getWriter().write("{\"code\":\"0\",\"data\":\"\",\"msg\":\"该用户无权限\"}");
+			
+
+			
+ORCL
+//在查询中进行判断
+select case when aa='1'
+		then 'aa'
+		when aa='2'
+		then 'bb'
+		else
+		'dd'
+		end as 'sss'
+from table;
+
+
+
 
 
 
