@@ -6,6 +6,8 @@ import com.wp.weipu.entity.Demo;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author zwp
@@ -26,4 +28,34 @@ public class Json {
     public String getStr(){
         return "str";
     }
+
+    @Test
+    public void jsonToList(){
+        LevelText levelText=new LevelText();
+        levelText.setTitle("father");
+        levelText.setContent("father content");
+        levelText.setOther("father other");
+        List<LevelText> levelTexts=new ArrayList<>();
+        for(int i=0;i<5;i++){
+            LevelText levelText1=new LevelText();
+            levelText1.setTitle("son "+i);
+            levelText1.setContent("son content"+i);
+            levelText1.setOther("son other "+i);
+            levelTexts.add(levelText1);
+        }
+        levelText.setChildren(levelTexts);
+
+        String jsonstr=levelText.toString();
+        System.out.println(levelText.toString());
+
+        LevelText levelT=null;
+        try {
+            levelT=JsonToObject.mapper.readValue(jsonstr,LevelText.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(levelT.getChildren().size());
+    }
+
+
 }

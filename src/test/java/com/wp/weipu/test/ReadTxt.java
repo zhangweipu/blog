@@ -19,6 +19,7 @@ public class ReadTxt {
             StringBuffer sb=new StringBuffer();
             BufferedReader reader=null;
             try {
+                //处理乱码
                 reader=new BufferedReader(new InputStreamReader(new FileInputStream(file),"GBK"));
                 String str=null;
                 while ((str=reader.readLine())!=null){
