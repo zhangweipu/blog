@@ -2,10 +2,8 @@ package com.wp.weipu.test;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.DoubleSummaryStatistics;
-import java.util.IntSummaryStatistics;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -176,6 +174,62 @@ public class Lambda implements ILambda {
                 .summaryStatistics();
         System.out.println(statistics.getAverage());
         System.out.println(statistics.getSum());
+    }
+
+    /**
+     * list转map
+     */
+    @Test
+    public void test10(){
+        List<DemoTest> list=new ArrayList<>();
+        for (int i=0;i<3;i++){
+            DemoTest demoTest=new DemoTest();
+            demoTest.setName("name"+i);
+            demoTest.setStr("str"+i);
+            list.add(demoTest);
+        }
+
+       Map<String,DemoTest> map= list.stream().collect(Collectors.toMap(
+               DemoTest::getName,Function.identity()
+       ));
+
+        Set<String> set=  map.keySet();
+        for (Iterator i=set.iterator();i.hasNext();){
+            System.out.printf(map.get(i.next()).toString());
+        }
+
+    }
+
+    private class DemoTest{
+        private String name;
+        private String str;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getStr() {
+            return str;
+        }
+
+        public void setStr(String str) {
+            this.str = str;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("{");
+            sb.append("\"name\":\"")
+                    .append(name).append('\"');
+            sb.append(",\"str\":\"")
+                    .append(str).append('\"');
+            sb.append('}');
+            return sb.toString();
+        }
     }
 
 }
