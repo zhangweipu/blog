@@ -5,11 +5,17 @@ server:
   
 spring:
   datasource:
-    name: mysql
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/programs?useUnicode=true&characterEncoding=UTF8
-    username: root
-    password: 1122
+#    name: mysql
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/programs?useUnicode=true&characterEncoding=UTF8
+#    username: root
+#    password: 1122
+
+      name: oracle
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@localhost:1521:ORCL
+      username: zwp
+      password: 1122
 
   mybatis:
     type-aliases-package: com.wp.weipu.entity

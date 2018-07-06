@@ -186,7 +186,11 @@
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
-
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${ojdbc.version}</version>
+        </dependency>
 
         <!--mapper-->
         <dependency>
@@ -295,25 +299,25 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>${mybatis.generator.version}</version>
                 <configuration>
-                    <configurationFile>${basedir}/src/main/resources/generator/generatorConfig-mysql.xml
+                    <configurationFile>${basedir}/src/main/resources/generator/generatorConfig-oracle.xml
                     <!--<configurationFile>${basedir}/src/main/resources/generator/generatorConfig-oracle.xml-->
                     </configurationFile>
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
                 </configuration>
                 <dependencies>
-                    <!--<dependency>-->
-                    <!--<groupId>com.oracle</groupId>-->
-                    <!--<artifactId>ojdbc6</artifactId>-->
-                    <!--<version>${ojdbc.version}</version>-->
-                    <!--<scope>runtime</scope>-->
-                    <!--</dependency>-->
                     <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.connector.version}</version>
-                        <scope>runtime</scope>
+                    <groupId>com.oracle</groupId>
+                    <artifactId>ojdbc6</artifactId>
+                    <version>${ojdbc.version}</version>
+                    <scope>runtime</scope>
                     </dependency>
+                    <!--<dependency>-->
+                        <!--<groupId>mysql</groupId>-->
+                        <!--<artifactId>mysql-connector-java</artifactId>-->
+                        <!--<version>${mysql.connector.version}</version>-->
+                        <!--<scope>runtime</scope>-->
+                    <!--</dependency>-->
                     <dependency>
                         <groupId>tk.mybatis</groupId>
                         <artifactId>mapper</artifactId>

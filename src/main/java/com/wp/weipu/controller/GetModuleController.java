@@ -19,7 +19,8 @@ public class GetModuleController {
 
     @PostMapping(value = "/dc_longfor/modularPool/insertModularsPool")
     public String insertModularsPool(@RequestBody String jsonData){
-        System.out.printf(jsonData);
+        System.out.printf(jsonData.length()+"");
+        logger.info(jsonData);
         return "{\"mCode\":\"200\",\"message\":\"aaa\"}";
     }
 }
