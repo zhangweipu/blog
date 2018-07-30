@@ -46,7 +46,7 @@
 
 
 
-   		<table tableName="COURSE" domainObjectName="Course" enableCountByExample="false"
+   		<table tableName="cm_refmodule" domainObjectName="CmRefmodule" enableCountByExample="false"
         enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"></table> 
 
 

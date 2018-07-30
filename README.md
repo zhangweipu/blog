@@ -335,11 +335,37 @@ from table;
 
 
 
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
+import java.util.List;
 
+/**
+ * DTO 与 Entity转换接口
+ *
+ * 注解参数：
+ * 字段名不同时进行转换， target是DTO字段，source是Entity字段
+ * @Mapping(target = "personName", source = "name")
+ *
+ * DTO中存在Entity中没有的字段
+ * @Mapping(target = "hand",  ignore = true)
+ *
+ **/
+@Mapper(componentModel = "spring")
+public interface ConvertMapper {
+    ConvertMapper INSTANCE = Mappers.getMapper(ConvertMapper.class);
 
-
-
+    /**
+     * ---------------------------
+     * Demo
+     * ---------------------------
+     */
+    DemoAddDTO entityToDTO(Demo entity);
+    void updateEntityFromDTO(DemoAddDTO demoAddDTO, @MappingTarget Demo entity);
+    void updateEntityFromDTO(List<DemoAddDTO> demoAddDTOList, @MappingTarget List<Demo> entity);
+    void updateEntityFromDTO(DemoUpdateDTO demoUpdateDTO, @MappingTarget Demo entity);
+    void updateEntityFromDTO(DemoSearchListDTO demoSearchListDTO, @MappingTarget Demo entity)
 
 
 

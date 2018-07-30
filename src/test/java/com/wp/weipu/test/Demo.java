@@ -2,8 +2,8 @@ package com.wp.weipu.test;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * @author zwp
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Demo {
 
-    private class Person{
+    private class Person implements Comparator<Person> {
         private String name;
         private Integer age;
 
@@ -41,6 +41,16 @@ public class Demo {
             sb.append('}');
             return sb.toString();
         }
+
+
+        @Override
+        public int compare(Person o1, Person o2) {
+            int flag=0;
+            if(o1.getName().equals(o2.getName())){
+                flag=0;
+            }
+            return flag;
+        }
     }
 
     public Json getJson(){
@@ -63,5 +73,26 @@ public class Demo {
         person.setName("sss");
         persons.add(person);
         System.out.println(persons.toString());
+    }
+
+    @Test
+    public void tests() throws UnsupportedEncodingException {
+        Set<Person> personSet=new HashSet<>();
+
+        for (int i=0;i<3;i++){
+            Person person=new Person();
+            person.setName("tom");
+            person.setAge(5);
+            personSet.add(person);
+        }
+
+//        System.out.printf(personSet.size()+"");
+//
+//        String aa="sss";
+//        System.out.println(aa.substring(0,20)+"2222");
+
+        String bb="%7B%22projectid%22%3A%2232104%22%2C%22projectguid%22%3A%222195FEF7-3A36-45AA-9A3C-B246312B564E%22%2C ";
+        System.out.printf(new String(bb.getBytes("ISO-8859-1"), "utf-8"));
+
     }
 }
