@@ -1,6 +1,7 @@
 package com.wp.weipu.test;
 
 import org.junit.Test;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.UnsupportedEncodingException;
 import java.util.*;
