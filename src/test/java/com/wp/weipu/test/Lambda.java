@@ -200,7 +200,17 @@ public class Lambda implements ILambda {
 
     }
 
-    private class DemoTest{
+    /**
+     * 转map
+     */
+    @Test
+    public void test11(){
+        Map<String,List<DemoTest>> map=new HashMap<>();
+        List<DemoTest> list=new ArrayList<>();
+        map=list.stream().collect(Collectors.groupingBy(DemoTest::getName));
+    }
+
+    public class DemoTest{
         private String name;
         private String str;
 

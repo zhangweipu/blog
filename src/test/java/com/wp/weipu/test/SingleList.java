@@ -1,5 +1,8 @@
 package com.wp.weipu.test;
 
+import org.junit.Test;
+import org.springframework.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -18,5 +21,14 @@ public class SingleList<T> {
         list.clear();
         list.addAll(set);
         return list;
+    }
+
+    @Test
+    public void test1(){
+        List<String> list=null;
+        System.out.println(list);
+        if (list.isEmpty()){
+            System.out.println("aaaaa");
+        }
     }
 }
