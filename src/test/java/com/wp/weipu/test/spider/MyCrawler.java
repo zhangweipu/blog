@@ -1,12 +1,10 @@
 package com.wp.weipu.test.spider;
 
-import org.mapstruct.ap.internal.util.Collections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * 爬虫的主类
@@ -23,7 +21,7 @@ public class MyCrawler {
      */
     private void initCrawlerWithSeeds(String[] seeds){
         for (int i=0;i<seeds.length;i++){
-            LinkQueue.addVisitedUrl(seeds[i]);
+            LinkQueue.addUnVisitedUrl(seeds[i]);
         }
     }
 
@@ -66,13 +64,13 @@ public class MyCrawler {
             //新为访问的地址
             for (String i:links){
                 logger.info("新的url"+i);
-                LinkQueue.addVisitedUrl(i);
+                LinkQueue.addUnVisitedUrl(i);
             }
         }
     }
 
     public static void main(String[] args) {
         MyCrawler crawler=new MyCrawler();
-        crawler.crawling(new String[]{"https://www.hao123.com/"},"https://www.hao123.com/");
+        crawler.crawling(new String[]{"http://tech.163.com/18/0808/08/DOM4P2V500097U7T.html"},"");
     }
 }

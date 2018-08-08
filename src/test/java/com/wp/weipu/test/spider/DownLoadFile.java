@@ -44,9 +44,10 @@ public class DownLoadFile {
      * @param filePath
      */
     private void saveToLocal(byte[] data,String filePath){
+        String diskName="d:/files/";
         logger.info("保存文件到"+filePath);
         try {
-            DataOutputStream out=new DataOutputStream(new FileOutputStream(new File(filePath)));
+            DataOutputStream out=new DataOutputStream(new FileOutputStream(new File(diskName+filePath)));
             for (int i=0;i<data.length;i++){
                 out.write(data[i]);
             }
@@ -89,7 +90,9 @@ public class DownLoadFile {
             //读取字节数组
             byte[] responseBody=getMethod.getResponseBody();
             //根据url生成保存文件名
-             filePath=getFileNameByUrl(url,getMethod.getResponseHeader("Content-Type").getValue());
+            if (getMethod.getResponseHeader("Content-Type")!=null) {
+                filePath = getFileNameByUrl(url, getMethod.getResponseHeader("Content-Type").getValue());
+            }
              saveToLocal(responseBody,filePath);
         } catch (IOException e) {
             logger.error("执行httpget请求出错",e);
