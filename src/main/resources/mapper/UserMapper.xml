@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wp.weipu.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wp.weipu.entity.User">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="userID" jdbcType="INTEGER" property="userid" />
+    <result column="usercode" jdbcType="VARCHAR" property="usercode" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="createdate" jdbcType="DATE" property="createdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    userID, usercode, username, phone, email, passwd, type, status, createdate
+  </sql>
+</mapper>
