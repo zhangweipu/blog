@@ -1,6 +1,7 @@
 package com.wp.weipu.config;
 
 import com.wp.weipu.security.interceptor.AdminAccessInterceptor;
+import com.wp.weipu.security.interceptor.CustomerAccessInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;
@@ -16,14 +17,22 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
     @Override
     protected void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(adminAccessInterceptor())
-                .addPathPatterns("/admin/api/**");
-        super.addInterceptors(registry);
+                .addPathPatterns("/admin/**");
+        registry.addInterceptor(customerAccessInterceptor())
+                .addPathPatterns("/customer/**");
+                super.addInterceptors(registry);
     }
 
     @Bean
     protected AdminAccessInterceptor adminAccessInterceptor(){
         return new AdminAccessInterceptor();
     }
+
+    @Bean
+    protected CustomerAccessInterceptor customerAccessInterceptor(){
+        return new CustomerAccessInterceptor();
+    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 

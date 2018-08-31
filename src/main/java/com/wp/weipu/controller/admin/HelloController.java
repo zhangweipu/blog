@@ -1,4 +1,4 @@
-package com.wp.weipu.controller;
+package com.wp.weipu.controller.admin;
 
 import com.wp.weipu.common.base.ResultBean;
 import org.slf4j.Logger;
@@ -38,12 +38,6 @@ public class HelloController {
         System.out.println(request.getContentType());
         System.out.println(request.getServerName());
         System.out.println(request.changeSessionId());
-
-
-
-
-
-
         return "index/hello2";
     }
 

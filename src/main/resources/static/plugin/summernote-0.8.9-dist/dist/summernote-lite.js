@@ -778,7 +778,7 @@ var ui = {
     removeLayout: function ($note, layoutInfo) {
         $note.html(layoutInfo.editable.html());
         layoutInfo.editor.remove();
-        $note.off('summernote'); // remove summernote custom event
+        $note.off('summernote'); // remove summernote customer event
         $note.show();
     }
 };
@@ -2356,7 +2356,7 @@ function detachEvents($node, events) {
  * @method isCustomStyleTag
  *
  * assert if a node contains a "note-styletag" class,
- * which implies that's a custom-made style tag node
+ * which implies that's a customer-made style tag node
  *
  * @param {Node} an HTML DOM node
  */
@@ -3643,7 +3643,7 @@ var Typing = /** @class */ (function () {
                 $$1.each(emptyAnchors, function (idx, anchor) {
                     dom.remove(anchor);
                 });
-                // replace empty heading, pre or custom-made styleTag with P tag
+                // replace empty heading, pre or customer-made styleTag with P tag
                 if ((dom.isHeading(nextPara) || dom.isPre(nextPara) || dom.isCustomStyleTag(nextPara)) && dom.isEmpty(nextPara)) {
                     nextPara = dom.replace(nextPara, 'p');
                 }
@@ -4477,7 +4477,7 @@ var Editor = /** @class */ (function () {
     }
     Editor.prototype.initialize = function () {
         var _this = this;
-        // bind custom events
+        // bind customer events
         this.$editable.on('keydown', function (event) {
             if (event.keyCode === key.code.ENTER) {
                 _this.context.triggerEvent('enter', event);
@@ -4807,7 +4807,7 @@ var Editor = /** @class */ (function () {
         // [workaround] for MSIE, IE need `<`
         tagName = env.isMSIE ? '<' + tagName + '>' : tagName;
         document.execCommand('FormatBlock', false, tagName);
-        // support custom class
+        // support customer class
         if ($target && $target.length) {
             var className = $target[0].className || '';
             if (className) {
@@ -7391,7 +7391,7 @@ var Context = /** @class */ (function () {
         Object.keys(this.memos).forEach(function (key) {
             _this.removeMemo(key);
         });
-        // trigger custom onDestroy callback
+        // trigger customer onDestroy callback
         this.triggerEvent('destroy', this);
     };
     Context.prototype.code = function (html) {

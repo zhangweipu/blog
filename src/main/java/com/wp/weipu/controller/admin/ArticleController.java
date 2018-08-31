@@ -1,4 +1,4 @@
-package com.wp.weipu.controller;
+package com.wp.weipu.controller.admin;
 
 import com.wp.weipu.common.base.BaseException;
 import com.wp.weipu.common.base.ResultBean;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 public class ArticleController {
     private static final Logger logger= LoggerFactory.getLogger(ArticleController.class);
 
-    @PostMapping(value = "/admin/addArticle")
+    @PostMapping(value = "/admin/article/add")
     public ResultBean add(@RequestBody @Valid ArticleDto articleDto, Errors errors) throws BaseException {
         if (errors.hasErrors()){
             throw new BaseException(errors.toString());
