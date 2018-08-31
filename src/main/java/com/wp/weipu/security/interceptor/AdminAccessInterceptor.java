@@ -20,7 +20,7 @@ public class AdminAccessInterceptor implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url=request.getRequestURI();
         String path=request.getContextPath();
-        logger.info("url"+url);
+        logger.info("访问的地址"+url);
         logger.info("path"+path);
         //拦截快开始的一些url
         return true;
