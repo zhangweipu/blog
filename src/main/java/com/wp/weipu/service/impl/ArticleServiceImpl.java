@@ -2,6 +2,7 @@ package com.wp.weipu.service.impl;
 
 import com.wp.weipu.entity.Article;
 import com.wp.weipu.service.IArticleService;
+import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
  * @description:
  * @date 2018/4/30
  */
+@Service
 public class ArticleServiceImpl implements IArticleService{
     @Override
     public void addArticleNormal(Article article) {

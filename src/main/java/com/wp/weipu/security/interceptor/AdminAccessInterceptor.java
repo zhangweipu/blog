@@ -1,7 +1,9 @@
 package com.wp.weipu.security.interceptor;
 
+import com.wp.weipu.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,6 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminAccessInterceptor implements HandlerInterceptor{
 
     private static final Logger logger= LoggerFactory.getLogger(AdminAccessInterceptor.class);
+
+    @Autowired
+    IUserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
