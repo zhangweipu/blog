@@ -24,15 +24,26 @@ public class StrSplit {
         int loadCount=LIMIT;
         int totalPage=(totalCount+ loadCount-1) / loadCount;
         int index=0;
-        for (int i=0;i<totalPage;i++){
+        int i=0;
+        while (index<totalCount){
             int endIndex=index+loadCount;
             if (endIndex>totalCount){
-                endIndex=index+(totalCount%loadCount);
+                endIndex=totalCount-1;
+            }
+            //保证截取的是一个完整的句子
+            boolean flag=true;
+            while (flag && endIndex<totalCount) {
+                char currentChar =str.charAt(endIndex);
+                if (currentChar==' '|| isPunctuation(currentChar)){
+                    flag=false;
+                }
+                endIndex++;
             }
             String fragment=str.substring(index,endIndex);
             strList.add(fragment);
             index=endIndex;
-            logger.info("装载当前页数"+(i+1));
+
+            logger.info("装载当前页数"+(i++));
             logger.info("下次装载index："+index);
         }
         return strList;
@@ -71,7 +82,7 @@ public class StrSplit {
         }
         return false;
     }
-    public boolean isPunctuation(char ch){
+    public static boolean isPunctuation(char ch){
         if(isCjkPunc(ch)) return true;
         if(isEnPunc(ch)) return true;
 
@@ -86,7 +97,7 @@ public class StrSplit {
         return false;
     }
 
-    public boolean isEnPunc(char ch){
+    public static boolean isEnPunc(char ch){
         if (0x21 <= ch && ch <= 0x22) return true;
         if (ch == 0x27 || ch == 0x2C) return true;
         if (ch == 0x2E || ch == 0x3A) return true;
@@ -94,7 +105,7 @@ public class StrSplit {
 
         return false;
     }
-    static boolean isCjkPunc(char ch) {
+    public static boolean isCjkPunc(char ch) {
         if (0x3001 <= ch && ch <= 0x3003) return true;
         if (0x301D <= ch && ch <= 0x301F) return true;
 

@@ -22,9 +22,6 @@ public class Main {
         TransApi api = new TransApi(APP_ID, SECURITY_KEY);
 
         String query = ReadDocx.doxc("D://15.docx");
-
-        System.out.println(query.length());
-        System.out.println("字符"+query);
         String str="good\n     d";
         System.out.println(str.length());
         //6000个字符截取一下
