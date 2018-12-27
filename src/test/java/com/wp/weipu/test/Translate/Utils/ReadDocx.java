@@ -19,8 +19,9 @@ import java.util.UUID;
 public class ReadDocx {
 //    @Test
     public static String doxc(String importPath) throws InvalidFormatException, IOException {
+        FileInputStream inputStream=null;
         try {
-            FileInputStream inputStream = new FileInputStream(importPath);
+            inputStream = new FileInputStream(importPath);
             XWPFDocument xDocument = new XWPFDocument(inputStream);
             List<XWPFParagraph> paragraphs = xDocument.getParagraphs();
             //List<XWPFPictureData> pictures = xDocument.getAllPictures();
@@ -59,7 +60,7 @@ public class ReadDocx {
 //                        System.out.println(map.get(id));
 //                        text = text +"<img src = '"+map.get(id)+"'/>";
                     }else{
-                        if (!run.toString().trim().equals("")){
+                        if (!(run.toString().trim().equals(""))&&!(run.toString().trim().length()==1)){
                             text = text+"\n" + run;
 //                            System.out.println("run"+run);
                         }
@@ -72,6 +73,8 @@ public class ReadDocx {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }finally {
+            inputStream.close();
         }
         return null;
     }
