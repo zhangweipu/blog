@@ -22,13 +22,18 @@ public class StrSplit {
         int totalCount=str.length();
         logger.info("字符串总长度："+totalCount);
         int loadCount=LIMIT;
-        int totalPage=(totalCount+ loadCount-1) / loadCount;
         int index=0;
         int i=0;
+        int endIndex=1;
+
         while (index<totalCount){
-            int endIndex=index+loadCount;
+             endIndex=index+loadCount;
             if (endIndex>totalCount){
                 endIndex=totalCount-1;
+            }
+            //防止同时指向最后一个字符
+            if (index==endIndex){
+                break;
             }
             //保证截取的是一个完整的句子
             boolean flag=true;
@@ -36,9 +41,11 @@ public class StrSplit {
                 char currentChar =str.charAt(endIndex);
                 if (currentChar==' '|| isPunctuation(currentChar)){
                     flag=false;
+                    endIndex--;
                 }
                 endIndex++;
             }
+            logger.info("从"+index+"到"+endIndex);
             String fragment=str.substring(index,endIndex);
             strList.add(fragment);
             index=endIndex;
