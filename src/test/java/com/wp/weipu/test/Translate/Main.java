@@ -25,10 +25,10 @@ public class Main extends Thread{
     private static final String SECURITY_KEY = "wRw9hP9OZtiXUSbf5aDb";
 
     public static void main(String[] args) throws IOException, InvalidFormatException, InterruptedException {
-        for (int i=14;i<=23;i++) {
+
             TransApi api = new TransApi(APP_ID, SECURITY_KEY);
             String path = "D://ppt//软件体系结构//";
-            String query = ReadDocx.doxc(path + i+".docx");
+            String query = ReadDocx.doxc("D://阅读.docx");
             logger.info(query.length() + "");
             //6000个字符截取一下
             List<String> strings = StrSplit.sentenceSplit(query);
@@ -41,11 +41,11 @@ public class Main extends Thread{
             }
             Main main = new Main();
             List<String> words = main.combineWords(responses);
-            WriteDocx.createDocx(words, "D://"+i+".docx");
+            WriteDocx.createDocx(words, "D://阅读1.docx");
             logger.info("翻译完成");
             Thread.sleep(4000);
         }
-    }
+
 
     public List<String> combineWords(List<Response> responses) {
         List<String> words = new ArrayList<>();
