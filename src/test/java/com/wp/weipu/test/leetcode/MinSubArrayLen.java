@@ -2,6 +2,7 @@ package com.wp.weipu.test.leetcode;
 
 import org.junit.Test;
 
+
 /**
  * 给定一个含有 n 个正整数的数组和一个正整数 s ，找出该数组中满足其和 ≥ s 的长度最小的连续子数组。
  * 如果不存在符合条件的连续子数组，返回 0。
@@ -43,22 +44,58 @@ public class MinSubArrayLen {
      */
     public int minSubArrayLen1(int s, int[] nums) {
         int n = nums.length;
-        int m = s;
-        sort(nums, 0, n - 1);
-        int index = 1;
-        for (int i = 0; i < n; i++) {
-            if (nums[i] > m || nums[i] == m) {
-                return index;
-            } else {
-                m = m - nums[i];
-                index++;
+        int min = n+1;
+        for (int j = 0; j < n; j++) {
+            int m = s;
+            int index = 1;
+            for (int i = j; i < n; i++) {
+                if (nums[i] >= m) {
+                    if (min > index) {
+                        min = index;
+                    }
+                    break;
+                } else {
+                    m = m - nums[i];
+                    index++;
+                }
             }
         }
-        return 0;
+        return min>n?0:min;
     }
 
     /**
-     * 从大到小排序先
+     * 使用一个循环实现
+     * @param s
+     * @param nums
+     * @return
+     */
+    public int minSubArrayLen2(int s, int[] nums) {
+        int n=nums.length;
+        int head=0,prehead=0;
+        int min=n+1;
+        int m=s;
+        int index=1;
+        while (head<n){
+            if(nums[head]>=m){
+                if(min>index){
+                    min=index;
+                    System.out.println(index);
+                }
+                prehead++;
+                head=prehead;
+                m=s;
+                index=1;
+            }else {
+                m=m-nums[head];
+                head++;
+                index++;
+            }
+        }
+        return min>n?0:min;
+    }
+
+    /**
+     * 从大到小排序先,不能用排序
      *
      * @return
      */
@@ -108,15 +145,15 @@ public class MinSubArrayLen {
 
     @Test
     public void main() {
-        int s = 7;
-
-        int[] nums = {2, 3, 1, 2, 4, 3};
-        int res = minSubArrayLen1(s, nums);
+        int s = 213;
+        int[] nums = {12, 28, 83, 4, 25, 26, 25, 2, 25, 25, 25, 12};
+        int res = minSubArrayLen2(s, nums);
         sort(nums, 0, nums.length - 1);
 
         for (int i = 0; i < nums.length; i++) {
-            System.out.println(nums[i]);
+            System.out.print(" " + nums[i] + " ");
         }
+        System.out.println("\n");
         System.out.println(res);
     }
 }
