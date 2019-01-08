@@ -5,7 +5,7 @@ package com.wp.weipu.test.threadandrunnable.matrix.parallelmethod;
  * 以一组启动十个线程
  */
 public class IndividualMultiplierTask implements Runnable {
-
+    //好吧这是地址，run方法只是改了这个地址里面的变量
     private final double[][] result;
     private final double[][] matrix1;
     private final double[][] matrix2;

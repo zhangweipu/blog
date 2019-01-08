@@ -4,7 +4,7 @@ import com.wp.weipu.test.threadandrunnable.matrix.MatrixGenerator;
 import org.junit.Test;
 
 /**
- * 数据太多，超慢
+ * 根据虚拟机核数，生成几个线程比较快
  */
 public class ParalleRowlMain {
 
