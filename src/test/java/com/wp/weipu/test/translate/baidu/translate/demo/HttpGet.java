@@ -1,4 +1,4 @@
-package com.wp.weipu.test.Translate.baidu.translate.demo;
+package com.wp.weipu.test.translate.baidu.translate.demo;
 
 import java.io.BufferedReader;
 import java.io.Closeable;

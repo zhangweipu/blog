@@ -1,4 +1,4 @@
-package com.wp.weipu.test.Translate.Utils;
+package com.wp.weipu.test.translate.Utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

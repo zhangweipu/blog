@@ -1,6 +1,6 @@
-package com.wp.weipu.test.Translate;
+package com.wp.weipu.test.translate;
 
-import com.wp.weipu.test.Translate.baidu.translate.demo.TransResult;
+import com.wp.weipu.test.translate.baidu.translate.demo.TransResult;
 
 import java.util.List;
 

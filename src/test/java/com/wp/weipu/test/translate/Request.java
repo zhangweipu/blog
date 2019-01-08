@@ -1,4 +1,4 @@
-package com.wp.weipu.test.Translate;
+package com.wp.weipu.test.translate;
 
 public class Request {
 

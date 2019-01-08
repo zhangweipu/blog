@@ -1,7 +1,7 @@
-package com.wp.weipu.test.Translate;
+package com.wp.weipu.test.translate;
 
-import com.wp.weipu.test.Translate.Utils.MD5;
-import com.wp.weipu.test.Translate.Utils.UrlEncode;
+import com.wp.weipu.test.translate.Utils.MD5;
+import com.wp.weipu.test.translate.Utils.UrlEncode;
 import com.wp.weipu.test.webservice.HttpService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

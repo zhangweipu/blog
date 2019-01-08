@@ -1,4 +1,4 @@
-package com.wp.weipu.test.Translate.Utils;
+package com.wp.weipu.test.translate.Utils;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;

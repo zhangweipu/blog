@@ -1,12 +1,9 @@
-package com.wp.weipu.test.Translate.Utils;
+package com.wp.weipu.test.translate.Utils;
 
-import org.apache.poi.xwpf.model.XWPFHeaderFooterPolicy;
 import org.apache.poi.xwpf.usermodel.*;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.math.BigInteger;
 
 public class WriteDocxTest {
 

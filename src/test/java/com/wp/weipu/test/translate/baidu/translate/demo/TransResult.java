@@ -1,4 +1,4 @@
-package com.wp.weipu.test.Translate.baidu.translate.demo;
+package com.wp.weipu.test.translate.baidu.translate.demo;
 
 public class TransResult {
     private String src;

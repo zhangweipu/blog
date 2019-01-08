@@ -1,13 +1,12 @@
-package com.wp.weipu.test.Translate;
+package com.wp.weipu.test.translate;
 
 
 import com.wp.weipu.test.JsonToObject;
-import com.wp.weipu.test.Translate.Utils.ReadDocx;
-import com.wp.weipu.test.Translate.Utils.ReadDocxTest;
-import com.wp.weipu.test.Translate.Utils.StrSplit;
-import com.wp.weipu.test.Translate.Utils.WriteDocx;
-import com.wp.weipu.test.Translate.baidu.translate.demo.TransApi;
-import com.wp.weipu.test.Translate.baidu.translate.demo.TransResult;
+import com.wp.weipu.test.translate.Utils.ReadDocx;
+import com.wp.weipu.test.translate.Utils.StrSplit;
+import com.wp.weipu.test.translate.Utils.WriteDocx;
+import com.wp.weipu.test.translate.baidu.translate.demo.TransApi;
+import com.wp.weipu.test.translate.baidu.translate.demo.TransResult;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

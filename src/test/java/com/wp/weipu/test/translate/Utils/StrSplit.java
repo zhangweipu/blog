@@ -1,4 +1,4 @@
-package com.wp.weipu.test.Translate.Utils;
+package com.wp.weipu.test.translate.Utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

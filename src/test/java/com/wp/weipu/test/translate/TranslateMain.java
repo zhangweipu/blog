@@ -1,15 +1,11 @@
-package com.wp.weipu.test.Translate;
+package com.wp.weipu.test.translate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.wp.weipu.test.JsonToObject;
 import com.wp.weipu.test.webservice.HttpService;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 public class TranslateMain {
