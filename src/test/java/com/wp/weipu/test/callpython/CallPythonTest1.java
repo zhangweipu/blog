@@ -31,7 +31,7 @@ public class CallPythonTest1 {
             br = new BufferedReader(new InputStreamReader(pr.getInputStream(), "utf-8"));
             String line = "";
             String result = "";
-            //返回的是python中print语句，这是输出流
+            //返回的是python中print语句，这是输出
             while ((line = br.readLine()) != null) {
                 result += line;
             }
