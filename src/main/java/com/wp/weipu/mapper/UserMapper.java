@@ -7,5 +7,5 @@ import com.wp.weipu.entity.User;
 import java.util.List;
 
 public interface UserMapper extends BaseMapper<User> {
-    List<User> validateUser(UserDto userDto);
+    User validateUser(UserDto userDto);
 }

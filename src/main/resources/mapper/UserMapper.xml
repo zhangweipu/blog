@@ -21,7 +21,7 @@
         -->
         userID, usercode, username, phone, email, passwd, type, status, createdate
     </sql>
-    <select id="validateUser" parameterType="com.wp.weipu.dto.UserDto" resultMap="BaseResultMap">
+    <select id="validateUser" parameterType="com.wp.weipu.dto.UserDto" resultType="com.wp.weipu.entity.User">
     SELECT * FROM user where username=#{username}   and passwd=#{passwd} and status='ACTIVE';
   </select>
 </mapper>

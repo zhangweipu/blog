@@ -18,9 +18,10 @@ import org.springframework.security.data.repository.query.SecurityEvaluationCont
  */
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
-    private static final Logger logger= LoggerFactory.getLogger(WebSecurityConfig.class);
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -29,9 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/web/**").permitAll()
+                .antMatchers("/single/**").permitAll()
                 .antMatchers("/admin/**").permitAll()
-                .antMatchers("/customer/**").authenticated();
+                .antMatchers("/web/**").authenticated();
     }
 
     @Override

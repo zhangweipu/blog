@@ -20,7 +20,7 @@ import java.util.Date;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/article")
+@RequestMapping("/admin/article")
 public class ArticleController {
     private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
@@ -44,9 +44,6 @@ public class ArticleController {
         return new ResultBean();
     }
 
-    @RequestMapping(value = "/getSentence/{id}", method = RequestMethod.GET)
-    public ResultBean<Article> serchArticle(@PathVariable Integer id) {
-        return new ResultBean<>(articleService.sercheById(id));
-    }
+
 
 }

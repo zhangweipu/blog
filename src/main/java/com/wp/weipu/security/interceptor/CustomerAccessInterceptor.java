@@ -1,5 +1,6 @@
 package com.wp.weipu.security.interceptor;
 
+import com.wp.weipu.common.utils.SetHttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -13,13 +14,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CustomerAccessInterceptor implements HandlerInterceptor {
 
-    private final static Logger logger= LoggerFactory.getLogger(CustomerAccessInterceptor.class);
+    private final static Logger logger = LoggerFactory.getLogger(CustomerAccessInterceptor.class);
 
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String url=request.getRequestURI();
+        logger.info("here");
+        SetHttpHeaders.setHeaders(request, response);
+        String url = request.getRequestURI();
         logger.info(url);
+        logger.info("请求");
 
         return true;
     }
