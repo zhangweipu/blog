@@ -1,5 +1,7 @@
 package com.wp.weipu.security.interceptor;
 
+import com.wp.weipu.common.base.ResultBean;
+import com.wp.weipu.common.utils.SetHttpHeaders;
 import com.wp.weipu.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,21 +28,28 @@ public class AdminAccessInterceptor implements HandlerInterceptor {
         String url = request.getRequestURI();
         String path = request.getContextPath();
         String RequestMethod = request.getMethod();
+
+        if (RequestMethod.equals("OPTIONS")) {
+            return true;
+        }
         System.out.println("请求方式" + RequestMethod);
+        //跨域设置
         String origin = request.getHeader("Origin");
         response.setHeader("Access-Control-Allow-Origin", origin);
         response.setHeader("Access-Control-Allow-Methods", "*");
-        response.setHeader("Access-Control-Allow-Headers", "Origin,Content-Type,Accept,token,X-Requested-With");
         response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "Origin,Content-Type,Accept,token,X-Requested-With");
         response.setContentType("text/html; charset=UTF-8");
-//        response = SetHttpHeaders.setHeaders(request, response);
-        if (RequestMethod.equals("OPTIONS")) {
+        //对登陆放行
+        if (url.equals("/admin/login")) {
             return true;
         }
         String author = request.getHeader("user");
         if (null == author || author.equals("")) {
+            response.getWriter().write("{\"code\":\"0\",\"data\":\"\",\"msg\":\"没有该用户\"}");
             return false;
         }
+
         logger.info("访问的地址" + url);
         logger.info("path" + path);
         //拦截快开始的一些url

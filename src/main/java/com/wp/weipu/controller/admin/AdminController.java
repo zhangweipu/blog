@@ -1,16 +1,14 @@
 package com.wp.weipu.controller.admin;
 
 import com.wp.weipu.common.base.ResultBean;
+import com.wp.weipu.common.utils.JsonToObject;
 import com.wp.weipu.dto.UserDto;
 import com.wp.weipu.entity.User;
 import com.wp.weipu.service.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -22,7 +20,7 @@ public class AdminController {
     IUserService userService;
 
     @PostMapping(value = "/login")
-    public ResultBean<User> login(UserDto userDto) {
+    public ResultBean<User> login(@RequestBody UserDto userDto) {
         logger.info("信息验证");
         ResultBean result = new ResultBean();
         if (userService.validateUser(userDto)) {

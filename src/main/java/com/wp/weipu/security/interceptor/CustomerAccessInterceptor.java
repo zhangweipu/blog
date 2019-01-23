@@ -22,6 +22,20 @@ public class CustomerAccessInterceptor implements HandlerInterceptor {
         logger.info("here");
         SetHttpHeaders.setHeaders(request, response);
         String url = request.getRequestURI();
+        String RequestMethod = request.getMethod();
+        if (RequestMethod.equals("OPTIONS")) {
+            return true;
+        }
+        String origin = request.getHeader("Origin");
+
+        response.setHeader("Access-Control-Allow-Origin", origin);
+        //重复消除
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        //就重复
+        response.setHeader("Access-Control-Allow-Headers", "Origin,Content-Type,Accept,token,X-Requested-With");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        //消除重复啊
+        response.setContentType("text/html; charset=UTF-8");
         logger.info(url);
         logger.info("请求");
 
