@@ -27,12 +27,13 @@ public class AdminController {
             logger.info("验证成功！！");
             result.setCode(1);
             result.setMsg("验证成功");
+            result.setData(userDto);
         } else {
             logger.info("验证失败！！");
             result.setCode(0);
             result.setMsg("用户名或密码不正确");
         }
-        return new ResultBean<>();
+        return result;
     }
 
 }
