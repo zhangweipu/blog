@@ -1,11 +1,14 @@
 package com.wp.weipu.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wp.weipu.entity.Article;
 import com.wp.weipu.mapper.ArticleMapper;
 import com.wp.weipu.service.IArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
@@ -50,5 +53,19 @@ public class ArticleServiceImpl implements IArticleService {
     public Article sercheById(Integer id) {
         logger.info("查询" + id);
         return articleMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 分页插件的使用,效率不高吧
+     *
+     * @param pageNum
+     * @return
+     */
+    @Override
+    public PageInfo<Article> searchByPage(int pageNum) {
+        PageHelper.startPage(pageNum, 30);
+        List<Article> allArticle = articleMapper.getArticles();
+        PageInfo<Article> pageInfo = new PageInfo<Article>(allArticle);
+        return pageInfo;
     }
 }

@@ -25,11 +25,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- *
- * @author chi.zhang
- * @create 2018/1/11 上午9:50
- *
- * @version v1.0
+ * 配置mybatis
  **/
 @Configuration
 @EnableTransactionManagement

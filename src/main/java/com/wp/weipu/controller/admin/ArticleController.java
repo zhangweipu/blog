@@ -1,5 +1,6 @@
 package com.wp.weipu.controller.admin;
 
+import com.github.pagehelper.PageInfo;
 import com.wp.weipu.common.base.BaseException;
 import com.wp.weipu.common.base.ResultBean;
 import com.wp.weipu.dto.ArticleDto;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zwp
@@ -27,6 +29,14 @@ public class ArticleController {
     @Autowired
     IArticleService articleService;
 
+    /**
+     * 添加内容
+     *
+     * @param articleDto
+     * @param errors
+     * @return
+     * @throws BaseException
+     */
     @PostMapping(value = "/add")
     public ResultBean add(@RequestBody @Valid ArticleDto articleDto, Errors errors) throws BaseException {
         System.out.println(articleDto);
@@ -44,6 +54,29 @@ public class ArticleController {
         return new ResultBean();
     }
 
+    /**
+     * 获取详细的文章内容
+     *
+     * @param id
+     * @return
+     */
+    @PostMapping(value = "/getArticle")
+    public ResultBean getArticle(int id) {
+        logger.info("获取完整文章");
+        Article article = articleService.sercheById(id);
 
+        return new ResultBean(article);
+    }
+
+    /***
+     * 获取文章的所有文章实现分页吧
+     * @return
+     */
+    @PostMapping(value = "searchArticle")
+    public ResultBean searchArticle(int pageNum) {
+        PageInfo<Article> pageInfo = articleService.searchByPage(pageNum);
+        List<Article> articles = pageInfo.getList();
+        return new ResultBean(articles);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.wp.weipu.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wp.weipu.entity.Article;
 
 import java.io.InputStream;
@@ -42,8 +43,16 @@ public interface IArticleService {
 
     /**
      * 根据条件查询
+     *
      * @param id
      * @return
      */
     Article sercheById(Integer id);
+
+    /**
+     * 通过页码查询
+     * @param pageNum
+     * @return
+     */
+    PageInfo<Article> searchByPage(int pageNum);
 }

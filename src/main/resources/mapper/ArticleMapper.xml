@@ -125,4 +125,7 @@
       type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getArticles" resultMap="BaseResultMap">
+    
+  </select>
 </mapper>
