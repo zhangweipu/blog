@@ -58,6 +58,15 @@ public class SingleController {
         JSONObject jso = JSONObject.parseObject(pageNum);
         int num = jso.getInteger("pageNum");
         PageInfo<Article> pageInfo = articleService.searchByPage(num);
+        //截取简短的字符串
+        pageInfo.getList().forEach(l -> {
+            String shortStr = l.getContent();
+            if (shortStr.length() > 200) {
+                shortStr = shortStr.substring(200);
+            }
+            shortStr.split("<p>");
+            l.setContent(shortStr);
+        });
         return new ResultBean(pageInfo);
     }
 
