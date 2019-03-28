@@ -28,6 +28,7 @@ public class AdminAccessInterceptor implements HandlerInterceptor {
         String url = request.getRequestURI();
         String path = request.getContextPath();
         String RequestMethod = request.getMethod();
+        logger.info("访问的地址" + url);
         if (RequestMethod.equals("OPTIONS")) {
             return true;
         }
@@ -49,7 +50,6 @@ public class AdminAccessInterceptor implements HandlerInterceptor {
             return false;
         }
         logger.info(author, "访问");
-        logger.info("访问的地址" + url);
         logger.info("path" + path);
         //拦截快开始的一些url
         return true;

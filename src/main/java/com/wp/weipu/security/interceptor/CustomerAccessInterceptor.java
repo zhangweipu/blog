@@ -22,6 +22,7 @@ public class CustomerAccessInterceptor implements HandlerInterceptor {
         logger.info("here");
         SetHttpHeaders.setHeaders(request, response);
         String url = request.getRequestURI();
+        logger.info(url);
         String RequestMethod = request.getMethod();
         if (RequestMethod.equals("OPTIONS")) {
             return true;
@@ -36,7 +37,7 @@ public class CustomerAccessInterceptor implements HandlerInterceptor {
         response.setHeader("Access-Control-Allow-Credentials", "true");
         //消除重复啊
         response.setContentType("text/html; charset=UTF-8");
-        logger.info(url);
+
         logger.info("请求");
 
         return true;

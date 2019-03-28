@@ -54,29 +54,7 @@ public class ArticleController {
         return new ResultBean();
     }
 
-    /**
-     * 获取详细的文章内容
-     *
-     * @param id
-     * @return
-     */
-    @PostMapping(value = "/getArticle")
-    public ResultBean getArticle(int id) {
-        logger.info("获取完整文章");
-        Article article = articleService.sercheById(id);
 
-        return new ResultBean(article);
-    }
 
-    /***
-     * 获取文章的所有文章实现分页吧
-     * @return
-     */
-    @PostMapping(value = "searchArticle")
-    public ResultBean searchArticle(int pageNum) {
-        PageInfo<Article> pageInfo = articleService.searchByPage(pageNum);
-        List<Article> articles = pageInfo.getList();
-        return new ResultBean(articles);
-    }
 
 }
