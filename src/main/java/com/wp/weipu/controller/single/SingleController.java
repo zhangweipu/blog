@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -61,11 +60,14 @@ public class SingleController {
         //截取简短的字符串
         pageInfo.getList().forEach(l -> {
             String shortStr = l.getContent();
-            if (shortStr.length() > 200) {
-                shortStr = shortStr.substring(200);
+            if (shortStr != null) {
+                if (shortStr.length() > 100) {
+                    shortStr = shortStr.substring(100);
+                }
+                String str=shortStr.replaceAll("<[^>]+>", "");
+                l.setContent("  "+str);
             }
-            shortStr.split("<p>");
-            l.setContent(shortStr);
+
         });
         return new ResultBean(pageInfo);
     }

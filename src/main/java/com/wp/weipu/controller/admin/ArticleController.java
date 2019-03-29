@@ -1,6 +1,5 @@
 package com.wp.weipu.controller.admin;
 
-import com.github.pagehelper.PageInfo;
 import com.wp.weipu.common.base.BaseException;
 import com.wp.weipu.common.base.ResultBean;
 import com.wp.weipu.dto.ArticleDto;
@@ -14,8 +13,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author zwp
@@ -54,7 +57,28 @@ public class ArticleController {
         return new ResultBean();
     }
 
-
+    /**
+     * 转存图片
+     *
+     * @param Base64Str
+     */
+    private String saveImage(String Base64Str, String filePath) {
+        if (Base64Str == null) {
+            return null;
+        }
+        //对字符串编码
+        byte[] bytes = Base64.getDecoder().decode(Base64Str);
+        try {
+            OutputStream out = new FileOutputStream(filePath);
+            out.write(bytes);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            //转换图片异常
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }
