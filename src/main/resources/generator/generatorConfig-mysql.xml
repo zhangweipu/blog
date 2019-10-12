@@ -37,7 +37,7 @@
         <sqlMapGenerator targetPackage="${targetXMLPackage}" targetProject="${targetResourcesProject}"/>
         <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}"
                              type="XMLMAPPER"/>
-
+<!--想生成默认方法改这里-->
         <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"/>
         <!--<table tableName="demo_account" domainObjectName="DemoAccount" enableCountByExample="false" enableUpdateByExample="false"-->
