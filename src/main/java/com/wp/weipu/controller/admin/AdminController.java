@@ -18,7 +18,6 @@ public class AdminController {
 
     @Autowired
     IUserService userService;
-
     @PostMapping(value = "/login")
     public ResultBean<User> login(@RequestBody UserDto userDto) {
         logger.info("信息验证");

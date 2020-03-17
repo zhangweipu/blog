@@ -12,9 +12,9 @@
 
 	<!-- 记录到文件 (每天一个文件) -->
 	<appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>log/dragonshard.log</File>   <!-- 最新的log文件名 -->
+		<File>log/wep.log</File>   <!-- 最新的log文件名 -->
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<FileNamePattern>log/dragonshard.%d{yyyy-MM-dd}.log</FileNamePattern>  <!-- 历史文件名 -->
+			<FileNamePattern>log/wep.%d{yyyy-MM-dd}.log</FileNamePattern>  <!-- 历史文件名 -->
 			<maxHistory>30</maxHistory> <!-- 保留 30 天的日志 -->
 		</rollingPolicy>
 		<encoder>
