@@ -290,9 +290,94 @@ public class Solution {
         System.out.println(res);
     }
 
+    public Map<String, String> getDigitMap() {
+        Map<String, String> digitsMap = new HashMap<>();
+        digitsMap.put("2", "abc");
+        digitsMap.put("3", "def");
+        digitsMap.put("4", "ghi");
+        digitsMap.put("5", "jkl");
+        digitsMap.put("6", "mno");
+        digitsMap.put("7", "pqrs");
+        digitsMap.put("8", "tuv");
+        digitsMap.put("9", "wxyz");
+        return digitsMap;
+    }
+
     public List<String> letterCombinations(String digits) {
-        Map<String, ArrayList> digitsMap = new HashMap<>();
+        List<String> result = new ArrayList<>();
+        Map<String, String> digitsMap = getDigitMap();
+        getDigit("", result, digits, digitsMap);
+        return result;
+    }
+
+    /**
+     * @param dig    这个是上一循环组合的
+     * @param digits 这个是集合
+     * @param digit  这个是剩下的字符
+     */
+    public void getDigit(String dig, List<String> digits, String digit, Map<String, String> digitMap) {
+        if ("".equals(digit)) {
+            if (!"".equals(dig)) {
+                digits.add(dig);
+            }
+            return;
+        }
+        int len = digit.length() - 1;
+        int index = 0;
+        char key = digit.charAt(index);
+        while ('1' == key) {
+            index++;
+            if (index <= len) {
+                key = digit.charAt(index);
+            } else {
+                if (!"".equals(dig)) {
+                    digits.add(dig);
+                }
+                return;
+            }
+        }
+        String di = digitMap.get(key + "");
+        for (char i : di.toCharArray()) {
+            getDigit(dig + i, digits, digit.substring(index + 1, len + 1), digitMap);
+        }
+    }
+
+
+    @Test
+    public void testDig() {
+        List<String> res = letterCombinations("13231");
+        System.out.println(res.toString());
+    }
+
+    /***
+     * 四个数之和，无重复
+     * @param nums
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> fourSum(int[] nums, int target) {
         return null;
+    }
+
+    public void quickSort2(int[] nums, int i, int j) {
+        if (j <= i) {
+            return;
+        }
+        int start = i, end = j;
+        int tag = nums[start];
+        while (start < end) {
+            while (nums[end] > tag && end > start) {
+                end--;
+            }
+            nums[start] = nums[end];
+            while (nums[start] < tag && end > start) {
+                start++;
+            }
+            nums[end] = nums[start];
+        }
+        nums[start] = tag;
+        quickSort(nums, i, start - 1);
+        quickSort(nums, end + 1, j);
     }
 }
 

@@ -56,3 +56,4 @@ class StaticSingle {
         return StaticSingleDe.staticSingle;
     }
 }
+//最后一种是枚举方法。。
