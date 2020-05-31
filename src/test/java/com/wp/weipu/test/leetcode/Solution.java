@@ -350,12 +350,13 @@ public class Solution {
     }
 
     /***
-     * 四个数之和，无重复
+     * 四个数之和，无重复,滑动窗口不行，没思路
      * @param nums
      * @param target
      * @return
      */
     public List<List<Integer>> fourSum(int[] nums, int target) {
+//        List<Integer>
         return null;
     }
 
@@ -378,6 +379,40 @@ public class Solution {
         nums[start] = tag;
         quickSort(nums, i, start - 1);
         quickSort(nums, end + 1, j);
+    }
+
+    //todo:过几天再实现
+    public void stack(int[] nums, int n) {
+        // 生成初始堆
+        for (int i = n / 2; i > 1; i--) {
+            shift(nums, i, n);
+        }
+        int tmp;
+        // 调整
+        for (int i = n; i >= 2; i--) {
+            tmp = nums[1];
+            nums[1] = tmp;
+            nums[i] = tmp;
+            shift(nums, 1, i - 1);
+        }
+    }
+
+    public void shift(int[] nums, int i, int j) {
+        int low = i, cur = 2 * i;
+        int tmp = nums[i];
+        while (cur < j) {
+            if (cur < j && nums[cur] < nums[cur + 1]) {
+                cur++;
+            }
+            if (cur < j && nums[cur] > tmp) {
+                nums[low] = nums[cur];
+                low = cur;
+                cur = 2 * low;
+            } else {
+                break;
+            }
+        }
+        nums[low] = tmp;
     }
 }
 

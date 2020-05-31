@@ -121,6 +121,7 @@ public class MinSubArrayLen {
                 nums[j] = temp;
             }
         }
+        //归位
         temp = nums[low];
         nums[low] = nums[i];
         nums[i] = temp;
