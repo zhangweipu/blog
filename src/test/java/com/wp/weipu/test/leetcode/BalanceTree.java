@@ -1,5 +1,7 @@
 package com.wp.weipu.test.leetcode;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -144,6 +146,7 @@ public class BalanceTree {
 
     /**
      * 后序遍历，需要一个标志，表示右孩子访问了
+     *
      * @param root
      */
     public void postOrder(TreeNode root) {
@@ -173,6 +176,65 @@ public class BalanceTree {
                     }
                 }
             } while (!stack.empty());
+        }
+    }
+
+    /**
+     * 从叶到根的所有路径
+     *
+     * @param root
+     */
+    public void allPath(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode tmp;
+        if (root != null) {
+            do {
+                // 左子树进栈
+                while (root != null) {
+                    stack.push(root);
+                    root = root.left;
+                }
+                tmp = null;
+                boolean flag = true;
+                while (!stack.empty() && flag) {
+                    root = stack.firstElement();
+                    if (root.right == tmp) {
+                        if (root.left == null && root.right == null) {
+                            // 取路径
+                            for (int i = stack.size() - 1; i >= 0; i--) {
+                                System.out.println(stack.get(i).val);
+                            }
+                        }
+                        stack.pop();
+                        //右孩子访问过的标志
+                        tmp = root;
+                    }else {
+                        root=root.right;
+                        flag=false;
+                    }
+                }
+
+            } while (!stack.empty());
+        }
+    }
+
+    /**
+     * 层次遍历。。环形队列
+     * @param root
+     */
+    public void levelOrder(TreeNode root){
+        Queue<TreeNode> queue=new LinkedList<>();
+        TreeNode head;
+        queue.add(root);
+        while (!queue.isEmpty()){
+            head=queue.poll();
+            System.out.println(head.val);
+            if (head.left!=null){
+                queue.add(head.left);
+            }
+            if (head.right!=null){
+                queue.add(head.right);
+            }
         }
     }
 }
