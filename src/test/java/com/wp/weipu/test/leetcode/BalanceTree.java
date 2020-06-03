@@ -1,5 +1,7 @@
 package com.wp.weipu.test.leetcode;
 
+import org.junit.Test;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -83,15 +85,15 @@ public class BalanceTree {
         return p.val == q.val && check(p.left, q.right) && check(p.right, q.left);
     }
 
-    class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        public TreeNode(int val) {
-            this.val = val;
-        }
-    }
+//    class TreeNode {
+//        int val;
+//        TreeNode left;
+//        TreeNode right;
+//
+//        public TreeNode(int val) {
+//            this.val = val;
+//        }
+//    }
 
     /**
      * 二叉树先序遍历
@@ -107,10 +109,10 @@ public class BalanceTree {
                 tmp = stack.pop();
                 // 根的时候就打印
                 System.out.println(tmp.val);
-                while (tmp.right != null) {
+                if (tmp.right != null) {
                     stack.push(tmp.right);
                 }
-                while (tmp.left != null) {
+                if (tmp.left != null) {
                     stack.push(tmp.left);
                 }
             }
@@ -163,7 +165,7 @@ public class BalanceTree {
                 flag = true;
                 while (!stack.empty() && flag) {
                     //和lastElement有点不清晰
-                    root = stack.firstElement();
+                    root = stack.lastElement();
                     // 最左的孩子
                     if (root.right == tmp) {
                         // 如果右孩子访问过了，则可以访问根
@@ -197,7 +199,7 @@ public class BalanceTree {
                 tmp = null;
                 boolean flag = true;
                 while (!stack.empty() && flag) {
-                    root = stack.firstElement();
+                    root = stack.lastElement();
                     if (root.right == tmp) {
                         if (root.left == null && root.right == null) {
                             // 取路径
@@ -208,9 +210,9 @@ public class BalanceTree {
                         stack.pop();
                         //右孩子访问过的标志
                         tmp = root;
-                    }else {
-                        root=root.right;
-                        flag=false;
+                    } else {
+                        root = root.right;
+                        flag = false;
                     }
                 }
 
@@ -220,21 +222,29 @@ public class BalanceTree {
 
     /**
      * 层次遍历。。环形队列
+     *
      * @param root
      */
-    public void levelOrder(TreeNode root){
-        Queue<TreeNode> queue=new LinkedList<>();
+    public void levelOrder(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
         TreeNode head;
         queue.add(root);
-        while (!queue.isEmpty()){
-            head=queue.poll();
+        while (!queue.isEmpty()) {
+            head = queue.poll();
             System.out.println(head.val);
-            if (head.left!=null){
+            if (head.left != null) {
                 queue.add(head.left);
             }
-            if (head.right!=null){
+            if (head.right != null) {
                 queue.add(head.right);
             }
         }
+    }
+
+    @Test
+    public void test() {
+        int[] arr = {1, 2, 3, 4, 5, 6,7,8,9,10};
+        TreeNode root = TreeNode.arrayToTree(arr, 0, arr.length - 1);
+        allPath(root);
     }
 }
