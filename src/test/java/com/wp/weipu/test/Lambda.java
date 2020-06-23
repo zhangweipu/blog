@@ -45,6 +45,7 @@ public class Lambda implements ILambda {
         list.forEach(l -> {
             System.out.println(l);
         });
+        //还有别的方法吧
         list.forEach(System.out::println);
         list.forEach(l -> {
             String a = String.valueOf(l);
@@ -66,9 +67,7 @@ public class Lambda implements ILambda {
             }
         });
         //第二种过滤 better
-        names.stream().filter((name) -> (condition.test(name))).forEach(name -> {
-            System.out.println(name);
-        });
+        names.stream().filter(condition::test).forEach(System.out::println);
     }
 
     /**
@@ -96,12 +95,12 @@ public class Lambda implements ILambda {
         //两个条件
         Predicate<String> startWithJ = (n) -> n.startsWith("j");
         Predicate<String> fourLong = (n) -> n.length() == 4;
-        Predicate<String> reg=(n)->n.split("")!=null;
+        Predicate<String> reg= (n)-> true;
         //开始过滤
         List<String> names = Arrays.asList("java", "python", "c++", "scala", "c", "php");
         names.stream()
                 .filter(startWithJ.and(fourLong))
-                .forEach(name -> System.out.println(name));
+                .forEach(System.out::println);
 
     }
 
