@@ -3,6 +3,11 @@ package com.wp.weipu.test.leetcode;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 使用hashmap做快速查找的作用
+ * 定义含有key，value的双链表表示队列
+ * hashmap用于定位
+ */
 public class LRUCache2 {
     //没明白缓存是什么意思啊
     class DLinkedNode {

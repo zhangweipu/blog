@@ -21,6 +21,7 @@ public class HelloProxy implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        //目的是在这里，增加自己的操作
         System.out.println("start say hello");
         Object result = method.invoke(this.proxy, args);
         return result;

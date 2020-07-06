@@ -23,7 +23,7 @@ class SinglePatternSyn {
     private SinglePatternSyn() {
     }
 
-    private static SinglePatternSyn getInstance() {
+    public static SinglePatternSyn getInstance() {
         if (instance == null) {
             synchronized (SinglePatternSyn.class) {
                 instance = new SinglePatternSyn();
@@ -36,7 +36,7 @@ class SinglePatternSyn {
 
 class ESinglePattern {
     //饿汉模式
-    private static ESinglePattern instance = new ESinglePattern();
+    private static final ESinglePattern instance = new ESinglePattern();
 
     public static ESinglePattern getInstance() {
         return instance;
@@ -46,7 +46,7 @@ class ESinglePattern {
 class StaticSingle {
     //静态模式，保证线程安全，因为静态类在对象加载时就加载了，只会加载一次，由jvm保证安全
     private static class StaticSingleDe {
-        private static StaticSingle staticSingle = new StaticSingle();
+        private static final StaticSingle staticSingle = new StaticSingle();
     }
 
     private StaticSingle() {

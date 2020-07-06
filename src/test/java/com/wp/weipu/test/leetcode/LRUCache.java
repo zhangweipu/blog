@@ -3,6 +3,9 @@ package com.wp.weipu.test.leetcode;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 一般不会考虑这种实现
+ */
 public class LRUCache extends LinkedHashMap<Integer, Integer> {
 
     private int capacity;
