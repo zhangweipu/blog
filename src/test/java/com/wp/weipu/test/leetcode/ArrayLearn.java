@@ -2,6 +2,7 @@ package com.wp.weipu.test.leetcode;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -514,5 +515,352 @@ public class ArrayLearn {
         list.add("231");
         list.forEach(System.out::println);
 
+    }
+
+    /**
+     * 链表两两进行角环
+     * 不带头节点的
+     *
+     * @param head
+     * @return
+     */
+    public ListNode swapPairs(ListNode head) {
+        if (head == null | head.next == null) {
+            return head;
+        }
+        ListNode first, second = head.next;
+        first = second.next;
+        second.next = swapPairs(first);
+        return second;
+    }
+
+    @Test
+    public void test3() {
+
+        System.out.println((int) Math.ceil(1 / 2.0));
+        int[][] m = {{1}};
+        System.out.println(m.length);
+        System.out.println(m[0].length);
+    }
+
+    /**
+     * 数组只能向右向下,正向走不对，我想的太简单了
+     *
+     * @param dungeon
+     * @return
+     */
+    public int calculateMinimumHP1(int[][] dungeon) {
+        //row是行，col是列
+        int col = dungeon[0].length, row = dungeon.length;
+        if (col == 1 && row == 1) {
+            return dungeon[0][0] > 0 ? 1 : Math.abs(dungeon[0][0]) + 1;
+        }
+        if (col == 1) {
+
+        }
+        int[][] memory = new int[row][col];
+        memory[0][0] = dungeon[0][0];
+        //填充第一列
+        for (int i = 1; i < row; i++) {
+            memory[i][0] = memory[i - 1][0] + dungeon[i][0];
+        }
+        for (int j = 1; j < col; j++) {
+            memory[0][j] = memory[0][j - 1] + dungeon[0][j];
+        }
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col; j++) {
+                memory[i][j] = Math.min(memory[i - 1][j], memory[i][j - 1]);
+            }
+        }
+        return memory[col - 1][row - 1];
+    }
+
+    public int calculateMinimumHP(int[][] dungeon) {
+        int n = dungeon.length, m = dungeon[0].length;
+        int[][] dp = new int[n + 1][m + 1];
+        for (int i = 0; i <= n; i++) {
+            Arrays.fill(dp[i], Integer.MAX_VALUE);
+        }
+        dp[n][m - 1] = dp[n - 1][m] = 1;
+        for (int i = n - 1; i >= 0; --i) {
+            for (int j = m - 1; j >= 0; --j) {
+                int minn = Math.min(dp[i + 1][j], dp[i][j + 1]);
+                dp[i][j] = Math.max(minn - dungeon[i][j], 1);
+            }
+        }
+        return dp[0][0];
+    }
+
+    /**
+     * 求大于这个数的下一个数
+     *
+     * @param nums
+     */
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i + 1] < nums[i]) {
+            i--;
+        }
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (j >= 0 && nums[j] <= nums[i]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        reverse(nums, i + 1);
+    }
+
+    public void reverse(int[] nums, int start) {
+        int i = start, j = nums.length - 1;
+        while (i < j) {
+            swap(nums, i, j);
+            i++;
+            j--;
+        }
+    }
+
+    public void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    public int[] intersect(int[] nums1, int[] nums2) {
+        if (nums1.length > nums2.length) {
+            return intersect1(nums2, nums1);
+        } else {
+            return intersect1(nums1, nums2);
+        }
+    }
+
+    public int[] intersect1(int[] num1, int[] num2) {
+        Map<Integer, Integer> set = new HashMap<>();
+        for (int n : num1) {
+            set.merge(n, 1, Integer::sum);
+        }
+        int[] num = new int[num1.length];
+        int j = 0;
+        for (int i = 0; i < num2.length; i++) {
+            if (set.containsKey(num2[i]) && set.get(num2[i]) > 0) {
+                num[j] = num2[i];
+                j++;
+                set.merge(num2[i], -1, Integer::sum);
+            }
+        }
+        return Arrays.copyOfRange(num, 0, j);
+    }
+
+    @Test
+    public void test4() {
+        int[] n = new int[]{1, 2, 2, 1};
+        int[] m = new int[]{2, 2};
+        for (int j : intersect(n, m)) {
+            System.out.println(j);
+        }
+    }
+
+    public ListNode reverseKGroup(ListNode head, int k) {
+        return null;
+    }
+
+    public ListNode reverse(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+        ListNode node = new ListNode(-1), tmp;
+        while (head != null) {
+            tmp = node.next;
+            node.next = head;
+            head = head.next;
+            node.next.next = tmp;
+        }
+        return node.next;
+    }
+
+    public ListNode reverse1(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode tmp = head, tmp2;
+        head = head.next;
+        tmp.next = null;
+
+        while (head != null) {
+            tmp2 = head.next;
+            head.next = tmp;
+            tmp = head;
+            head = tmp2;
+        }
+        return tmp;
+    }
+
+    @Test
+    public void test6() {
+        ListNode node = new ListNode(1), head;
+        head = node;
+        node.next = new ListNode(2);
+        node = node.next;
+        node.next = new ListNode(99);
+        node = node.next;
+        node.next = new ListNode(3);
+
+        ListNode root = reverse1(head);
+        while (root != null) {
+            System.out.println(root.val);
+            root = root.next;
+        }
+
+    }
+
+    /**
+     * 三角形的最短路径
+     *
+     * @param triangle
+     * @return
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int level = triangle.size();
+        int[] min = new int[level];
+        for (int i = 0; i < level; i++) {
+            List<Integer> subTriangle = triangle.get(i);
+        }
+        return 0;
+    }
+
+    /**
+     * A数组的长度，等于两个数组的和
+     * 采用插入排序的方式
+     * <p>
+     * 有一个大佬的思路是从后往前插入，就是计算索引有点复杂
+     *
+     * @param A
+     * @param m
+     * @param B
+     * @param n
+     */
+    public void merge(int[] A, int m, int[] B, int n) {
+        int j = 0;
+        for (int i = 0; i < n; i++) {
+            //找位置
+            while (j < m) {
+                //这一步的时候会和0比较，容易出问题
+                if (B[i] > A[j] && A[j] != 0) {
+                    j++;
+                } else {
+                    break;
+                }
+            }
+            insert(A, j, B[i]);
+        }
+
+    }
+
+    public void insert(int[] nums, int i, int num) {
+        assert nums.length > i : "插入点大于数组长度";
+        int tmp = nums[i];
+        for (int j = i + 1; j < nums.length; j++) {
+            int tmp2 = nums[j];
+            nums[j] = tmp;
+            tmp = tmp2;
+        }
+        nums[i] = num;
+    }
+
+    @Test
+    public void test7() {
+        int[] num1 = {1, 2, 3, 4, 5, 0, 0, 0, 0, 0};
+        int[] num2 = {2, 3, 4, 5, 6};
+        merge(num1, 10, num2, 5);
+        for (int i : num1) {
+            System.out.println(i);
+        }
+    }
+
+    /**
+     * 判断是不是二分图，二分图就是把节点可以分成两块，两块的节点间没有边
+     * 可以采用DFS
+     * 给节点染色的方式
+     *
+     * @param graph
+     * @return
+     */
+    class Solution {
+        //节点颜色
+        private static final int UNCOLORED = 0;
+        private static final int RED = 1;
+        private static final int GREEN = 2;
+        //声明存颜色的数组，根据节点来的，我也可以用hashmap
+        private int[] color;
+        private boolean valid;
+
+        public boolean isBipartite(int[][] graph) {
+            //节点的值，不大于节点的个数
+            int n = graph.length;
+            valid = true;
+            color = new int[n];
+            //使用了数组方法
+            Arrays.fill(color, UNCOLORED);
+            for (int i = 0; i < n; i++) {
+                dfs(graph, i, RED);
+            }
+            //是否是二分图
+            return valid;
+        }
+
+        /**
+         * 采用深度遍历的方式，遍历整个图
+         */
+        public void dfs(int[][] graph, int node, int c) {
+            color[node] = c;
+            //其邻居节点的颜色
+            int nextColor = c == RED ? GREEN : RED;
+            for (int i : graph[node]) {
+                if (color[i] == UNCOLORED) {
+                    dfs(graph, i, nextColor);
+                    //这个是在已经判定结束了，不再继续执行
+                    if (!valid) {
+                        return;
+                    }
+                } else if (color[i] == c) {
+                    valid = false;
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
+     * 怎么判断溢出
+     *
+     * @param dividend
+     * @param divisor
+     * @return
+     */
+    public int divide(int dividend, int divisor) {
+        if(dividend==Integer.MIN_VALUE&&divisor==-1){
+            return Integer.MAX_VALUE;
+        }
+        if(divisor==1){
+            return dividend;
+        }
+        int res=0;
+        boolean neg=(dividend<0&&divisor>0)||(divisor<0&&dividend>0);
+        //转成负数可以防止数组过界 -2**31 2**31-1
+        divisor=-Math.abs(divisor);
+        dividend=-Math.abs(dividend);
+
+        while(dividend<=divisor){
+            dividend-=divisor;
+            res++;
+        }
+        return neg?-res:res;
+    }
+
+    @Test
+    public void test8() {
+        int divs = -2147483648;
+        int div = -1;
+        System.out.println(-Math.abs(divs));
     }
 }

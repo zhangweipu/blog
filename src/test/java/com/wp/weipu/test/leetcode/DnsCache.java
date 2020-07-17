@@ -5,6 +5,7 @@ import org.junit.Test;
 /**
  * dns查找缓存,
  * trie树，前缀树
+ * 这个树应该还简单的
  */
 public class DnsCache {
     //ip地址最多有11个不同的字符

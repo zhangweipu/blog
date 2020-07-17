@@ -206,6 +206,7 @@ public class Lambda implements ILambda {
     public void test11(){
         Map<String,List<DemoTest>> map=new HashMap<>();
         List<DemoTest> list=new ArrayList<>();
+        //还可以分组操作。。。。。
         map=list.stream().collect(Collectors.groupingBy(DemoTest::getName));
     }
 

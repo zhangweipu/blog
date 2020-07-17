@@ -243,8 +243,58 @@ public class BalanceTree {
 
     @Test
     public void test() {
-        int[] arr = {1, 2, 3, 4, 5, 6,7,8,9,10};
+        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         TreeNode root = TreeNode.arrayToTree(arr, 0, arr.length - 1);
         allPath(root);
+    }
+
+    /**
+     * 重建二叉树
+     *
+     * @param pre
+     * @param mid
+     */
+    public void buildTree(int[] pre, int mid[]) {
+        TreeNode root = buildRecur(pre, mid, 0, pre.length - 1, 0, mid.length - 1);
+        inOrder(root);
+    }
+
+    /**
+     * 虽然我不想用那么多的参数
+     *
+     * @param pre
+     * @param mid
+     * @param preIn
+     * @param preEnd
+     * @param minIn
+     * @param midEnd
+     * @return
+     */
+    public TreeNode buildRecur(int pre[], int mid[], int preIn, int preEnd,
+                               int minIn, int midEnd) {
+        if (preIn > preEnd || minIn > midEnd) {
+            return null;
+        }
+        TreeNode root = new TreeNode(pre[preIn]);
+        int i;
+        for (i = minIn; i <= midEnd; i++) {
+            if (mid[i] == root.val) {
+                break;
+            }
+        }
+        //序号要理清
+        root.left = buildRecur(pre, mid, preIn + 1,
+                preIn + (i - minIn), minIn, i - 1);
+
+        root.right = buildRecur(pre, mid, preIn + (i - minIn) + 1,
+                preEnd, i + 1, midEnd);
+        return root;
+    }
+
+    @Test
+    public void test1() {
+        int[] pre = {3, 9, 20, 15, 7};
+        int[] in = {9, 3, 15, 20, 7};
+        buildTree(pre, in);
     }
 }
