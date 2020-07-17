@@ -2,6 +2,7 @@ package com.wp.weipu.test.leetcode;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -515,4 +516,82 @@ public class ArrayLearn {
         list.forEach(System.out::println);
 
     }
+
+    /**
+     * 四数之和，不能重复
+     * 先固定四个数的前两个值，前两个数肯定是小的
+     * 然后通过双指针去求后两个数
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        int len = nums.length;
+        if (len < 4) {
+            //数组长度不够，返回空
+            return result;
+        }
+        Arrays.sort(nums);
+        //这样表示数组中没有符合的四个数
+        int minvalue = nums[0] + nums[1] + nums[2] + nums[3];
+        int maxValue = nums[len - 1] + nums[len - 2] + nums[len - 3] + nums[len - 4];
+        if (minvalue > target || maxValue < target) {
+            return result;
+        }
+        for (int one = 0; one <= len - 4; one++) {
+            //固定第一个数
+            int oneValue = nums[one];
+            if (one > 0 && nums[one] == nums[one - 1]) {
+                continue;
+            }
+            for (int two = one + 1; two <= len - 3; two++) {
+                //固定第二个数
+                int twoValue = nums[two];
+                int left = two + 1, right = len - 1;
+                if (two > one + 1 && nums[two] == nums[two - 1]) {
+                    continue;
+                }
+                minvalue = oneValue + twoValue + nums[two + 1] + nums[two + 2];
+                maxValue = oneValue + twoValue + nums[len - 1] + nums[len - 2];
+                //这个时候还不能返回
+                if (maxValue < target || minvalue > target) {
+                    left = right;
+                }
+                //先确定前两个，再通过双指针做
+                while (left < right) {
+                    int fourNumSum = oneValue + twoValue + nums[left] + nums[right];
+                    if (fourNumSum > target) {
+                        right--;
+                        while (right > left && nums[right] == nums[right + 1]) {
+                            right--;
+                        }
+                    } else if (fourNumSum < target) {
+                        left++;
+                        while (left < right && nums[left] == nums[left - 1]) {
+                            left++;
+                        }
+                    } else {
+                        List<Integer> res = new ArrayList<>();
+                        res.add(oneValue);
+                        res.add(twoValue);
+                        res.add(nums[left]);
+                        res.add(nums[right]);
+                        result.add(res);
+                        left++;
+                        right--;
+                        while (right > left && nums[left] == nums[left - 1]) {
+                            left++;
+                        }
+                        while (right > left && nums[right] == nums[right + 1]) {
+                            right++;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 }
