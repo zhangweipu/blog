@@ -1,8 +1,6 @@
 package com.wp.weipu.test.juclearn;
 
-import sun.awt.Mutex;
 
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * juc的学习

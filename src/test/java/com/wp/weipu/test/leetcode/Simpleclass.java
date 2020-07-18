@@ -89,18 +89,21 @@ public class Simpleclass {
     /**
      * 外观数列
      * 对上一个数的描述
+     * 使用递归算法也可以
      *
      * @param n
      * @return
      */
     public String countAndSay(int n) {
-
+        if (n == 1) {
+            return "1";
+        }
         if (n == 2) {
             return "11";
         }
         StringBuilder sb = new StringBuilder("11");
         //1另算
-        for (int i = 0; i < n-2; i++) {
+        for (int i = 0; i < n - 2; i++) {
             int len = sb.length();
             int index = 0;
             StringBuilder tmp = new StringBuilder();
@@ -120,7 +123,22 @@ public class Simpleclass {
 
     @Test
     public void test2() {
-        String res = countAndSay(4);
+        String res = countAndSay(5);
         System.out.println(res);
+    }
+
+    /**
+     * 最大子数组和
+     *
+     * @param nums
+     * @return
+     */
+    public int maxSubArray(int[] nums) {
+        int sum = 0;
+        int len = nums.length;
+        for (int i = 0; i < len; i++) {
+            sum = Math.max(nums[i], sum + nums[i]);
+        }
+        return sum;
     }
 }
