@@ -142,4 +142,138 @@ public class Simpleclass {
         }
         return sum;
     }
+
+    @Test
+    public void test5() {
+        int num = 886;
+        //分解出百分位
+        int h = num / 100;
+        //十分位
+        int t = num % 100 / 10;
+        //个分位
+        int g = num % 10;
+        System.out.println(h + "," + t + "," + g);
+        flowers(1000);
+    }
+
+    /**
+     * 输出100-n的水仙花数，100<n<1000
+     *
+     * @param n
+     */
+    public void flowers(int n) {
+        for (int i = 100; i < n; i++) {
+            int h = i / 100;
+            int t = i / 10 % 10;
+            int g = i % 10;
+            if ((h * h * h + t * t * t + g * g * g) == i) {
+                System.out.println(h + "," + t + "," + g + "\n");
+            }
+        }
+    }
+
+    /**
+     * 有序数组，两数之和
+     * 使用双指针
+     *
+     * @param numbers
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] numbers, int target) {
+        int len = numbers.length;
+        int i = 0, j = len - 1;
+        while (i < j) {
+            while (i < j && numbers[i] + numbers[j] < target) {
+                i++;
+            }
+            while (i < j && numbers[j] + numbers[i] > target) {
+                j--;
+            }
+            if (numbers[i] + numbers[j] == target) {
+                return new int[]{i + 1, j + 1};
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 最后一个单词的长度
+     * 两个条件，一个是空格一个是count不等于0啊
+     *
+     * @param s
+     * @return
+     */
+    public int lengthOfLastWord(String s) {
+        s = "    " + s;
+        int sLen = s.length() - 2;
+        int max = 0;
+        while (sLen >= 0) {
+            if (s.charAt(sLen + 1) != ' ' && s.charAt(sLen) == ' ') {
+                max++;
+                break;
+            }
+            if (s.charAt(sLen + 1) != ' ') {
+                max++;
+            }
+            sLen--;
+        }
+        return max;
+    }
+
+    @Test
+    public void tes7() {
+        System.out.println(mySqrt(1));
+    }
+
+    /**
+     * 这个考虑用位运算
+     * 使用二分法查找
+     * 我这样更准确些
+     * 题目要求不是这样啊
+     *
+     * @param x
+     * @return
+     */
+    public int mySqrt(int x) {
+        double mid = x / 2.0;
+        double low = 0, high = x;
+        while (low < high) {
+//            if (mid * (mid + 1) > x && (mid - 1) * mid < x) {
+//                break;
+//            }
+            if (mid * mid > x) {
+                high = mid - 1;
+            } else {
+                low = mid;
+            }
+            mid = (high + 1 + low) / 2.0;
+        }
+        return (int) Math.floor(mid);
+    }
+
+    /**
+     * 判断二叉树是否为平衡二叉树
+     * 错了
+     * @param root
+     * @return
+     */
+    public boolean isBalanced(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (Math.abs(getHeight(root.right) - getHeight(root.left)) > 1) {
+            return false;
+        }
+        return isBalanced(root.right) && isBalanced(root.left);
+    }
+
+    public int getHeight(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        int left = getHeight(root.left) + 1;
+        int right = getHeight(root.right) + 1;
+        return Math.max(left, right);
+    }
 }
