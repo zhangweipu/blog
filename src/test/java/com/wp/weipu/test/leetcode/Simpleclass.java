@@ -3,7 +3,9 @@ package com.wp.weipu.test.leetcode;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * leetcode中简单的题
@@ -255,6 +257,7 @@ public class Simpleclass {
     /**
      * 判断二叉树是否为平衡二叉树
      * 错了
+     *
      * @param root
      * @return
      */
@@ -275,5 +278,47 @@ public class Simpleclass {
         int left = getHeight(root.left) + 1;
         int right = getHeight(root.right) + 1;
         return Math.max(left, right);
+    }
+
+    /**
+     * 采用空间换时间的办法
+     * 不带头节点
+     *
+     * @param head
+     * @return
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        Set<Integer> keySet = new HashSet<>();
+        keySet.add(head.val);
+        ListNode h = head.next, tmp = head;
+        while (h != null) {
+            if (keySet.contains(h.val)) {
+                h = h.next;
+                tmp.next = h;
+            } else {
+                keySet.add(h.val);
+                h = h.next;
+                tmp = tmp.next;
+            }
+        }
+        return head;
+    }
+
+    /**
+     * @param p
+     * @param q
+     * @return
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p == null && q == null) {
+            return true;
+        }
+        if ((p == null && q != null) || (q == null && p != null) || (p.val != q.val)) {
+            return false;
+        }
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 }
