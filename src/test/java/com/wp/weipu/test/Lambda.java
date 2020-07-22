@@ -1,11 +1,14 @@
 package com.wp.weipu.test;
 
+import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * java8的lambda的用法
@@ -95,7 +98,7 @@ public class Lambda implements ILambda {
         //两个条件
         Predicate<String> startWithJ = (n) -> n.startsWith("j");
         Predicate<String> fourLong = (n) -> n.length() == 4;
-        Predicate<String> reg= (n)-> true;
+        Predicate<String> reg = (n) -> true;
         //开始过滤
         List<String> names = Arrays.asList("java", "python", "c++", "scala", "c", "php");
         names.stream()
@@ -141,14 +144,14 @@ public class Lambda implements ILambda {
      */
     @Test
     public void test8() {
-        List<Integer> numbers=Arrays.asList(1,2,3,4,3,5,5,7);
-        List<Integer> dis=numbers.stream()
-                .map(i->i*i)
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 3, 5, 5, 7);
+        List<Integer> dis = numbers.stream()
+                .map(i -> i * i)
                 .distinct()
                 .collect(Collectors.toList());
-        Integer num=numbers.stream()
-                .map(j->j+1)
-                .reduce((sum,i)->sum+i)
+        Integer num = numbers.stream()
+                .map(j -> j + 1)
+                .reduce((sum, i) -> sum + i)
                 .get();
         System.out.println(dis);
     }
@@ -158,18 +161,18 @@ public class Lambda implements ILambda {
      */
 
     @Test
-    public void test9(){
-        List<Integer> numbers=Arrays.asList(1,2,3,4,3,5,5,7);
-        IntSummaryStatistics stats=numbers.stream()
-                .mapToInt((x)->x)
+    public void test9() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 3, 5, 5, 7);
+        IntSummaryStatistics stats = numbers.stream()
+                .mapToInt((x) -> x)
                 .summaryStatistics();
-        System.out.println("平均："+stats.getAverage());
-        System.out.println("max:"+stats.getMax());
-        System.out.println("min"+stats.getSum());
+        System.out.println("平均：" + stats.getAverage());
+        System.out.println("max:" + stats.getMax());
+        System.out.println("min" + stats.getSum());
 
-        List<Double> num=Arrays.asList(1.22,2.33,4.44);
-        DoubleSummaryStatistics statistics=num.stream()
-                .mapToDouble((X)->X)
+        List<Double> num = Arrays.asList(1.22, 2.33, 4.44);
+        DoubleSummaryStatistics statistics = num.stream()
+                .mapToDouble((X) -> X)
                 .summaryStatistics();
         System.out.println(statistics.getAverage());
         System.out.println(statistics.getSum());
@@ -179,21 +182,21 @@ public class Lambda implements ILambda {
      * list转map
      */
     @Test
-    public void test10(){
-        List<DemoTest> list=new ArrayList<>();
-        for (int i=0;i<3;i++){
-            DemoTest demoTest=new DemoTest();
-            demoTest.setName("name"+i);
-            demoTest.setStr("str"+i);
+    public void test10() {
+        List<DemoTest> list = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            DemoTest demoTest = new DemoTest();
+            demoTest.setName("name" + i);
+            demoTest.setStr("str" + i);
             list.add(demoTest);
         }
 
-       Map<String,DemoTest> map= list.stream().collect(Collectors.toMap(
-               DemoTest::getName,Function.identity()
-       ));
+        Map<String, DemoTest> map = list.stream().collect(Collectors.toMap(
+                DemoTest::getName, Function.identity()
+        ));
 
-        Set<String> set=  map.keySet();
-        for (Iterator i=set.iterator();i.hasNext();){
+        Set<String> set = map.keySet();
+        for (Iterator i = set.iterator(); i.hasNext(); ) {
             System.out.printf(map.get(i.next()).toString());
         }
 
@@ -203,16 +206,45 @@ public class Lambda implements ILambda {
      * 转map
      */
     @Test
-    public void test11(){
-        Map<String,List<DemoTest>> map=new HashMap<>();
-        List<DemoTest> list=new ArrayList<>();
+    public void test11() {
+        Map<String, List<DemoTest>> map = new HashMap<>();
+        List<DemoTest> list = new ArrayList<>();
         //还可以分组操作。。。。。
-        map=list.stream().collect(Collectors.groupingBy(DemoTest::getName));
+        map = list.stream().collect(Collectors.groupingBy(DemoTest::getName));
     }
 
-    public class DemoTest{
+    /**
+     * 把给定用户名的用户，打包起来
+     */
+    @Test
+    public void test12() {
+        List<DemoTest> lis = new ArrayList<>();
+        Consumer<DemoTest> consumer = x -> {
+            if (x.name.equals("lisi")) {
+                lis.add(x);
+            }
+        };
+        consumer = consumer.andThen(x -> lis.removeIf(y -> y.str.equals("www")));
+        Stream.of(new DemoTest("ss", "lss"),
+                new DemoTest("lisi", "www"),
+                new DemoTest("lisi", "sss"),
+                new DemoTest("zhong", "aaa"),
+                new DemoTest("bai", "sss")).forEach(consumer);
+        //序列化
+        System.out.println(JSON.toJSONString(lis));
+    }
+
+    public class DemoTest {
         private String name;
         private String str;
+
+        public DemoTest(String name, String str) {
+            this.name = name;
+            this.str = str;
+        }
+
+        public DemoTest() {
+        }
 
         public String getName() {
             return name;
