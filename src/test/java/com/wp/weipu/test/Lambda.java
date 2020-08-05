@@ -24,12 +24,7 @@ import java.util.stream.Stream;
  * @author zwp
  */
 
-public class Lambda implements ILambda {
-
-    @Override
-    public String func(String a, String b) {
-        return a + b;
-    }
+public class Lambda {
 
     /**
      * （一）lambda实现匿名类，不懂

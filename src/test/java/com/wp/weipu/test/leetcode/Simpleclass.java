@@ -1,11 +1,10 @@
 package com.wp.weipu.test.leetcode;
 
+import com.alibaba.fastjson.JSON;
+import com.sun.org.apache.bcel.internal.generic.LoadClass;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * leetcode中简单的题
@@ -320,5 +319,101 @@ public class Simpleclass {
             return false;
         }
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
+    /**
+     * @param N
+     * @return
+     */
+    public boolean divisorGame(int N) {
+        int num = N;
+
+        while (num > 0) {
+
+        }
+        return false;
+    }
+
+    /**
+     * 相交链表
+     * 找到相交的点
+     * hash表法，不错
+     * 它们要同时走
+     *
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
+            return null;
+        }
+        ListNode preA = headA, preB = headB;
+        //同时才会有效
+        while (preA != preB) {
+            preA = preA == null ? headB : preA.next;
+            preB = preB == null ? headA : preB.next;
+        }
+        return preA;
+    }
+
+    /**
+     * 杨辉三角，
+     *
+     * @param numRows
+     * @return
+     */
+    public List<List<Integer>> generate(int numRows) {
+        if (numRows == 0) {
+            return null;
+        }
+        List<List<Integer>> res = new ArrayList<>();
+
+        int[][] mat = new int[numRows][numRows];
+        for (int i = 0; i < numRows; i++) {
+            mat[i][0] = 1;
+            mat[i][i] = 1;
+        }
+        List<Integer> sub = new ArrayList<>();
+        sub.add(1);
+        res.add(sub);
+        if (numRows == 1) {
+            return res;
+        }
+        sub = new ArrayList<>();
+        sub.add(1);
+        sub.add(1);
+        res.add(sub);
+        if (numRows == 2) {
+            return res;
+        }
+        for (int i = 2; i < numRows; i++) {
+            sub = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    sub.add(mat[i][j]);
+                } else {
+                    mat[i][j] = mat[i - 1][j] + mat[i - 1][j - 1];
+                    sub.add(mat[i][j]);
+                }
+            }
+            res.add(sub);
+        }
+        return res;
+    }
+
+    @Test
+    public void test4() {
+        List<List<Integer>> res = generate(1);
+        System.out.println(JSON.toJSONString(res));
+    }
+
+    @Test
+    public void test6() {
+        String str = "true and false";
+        String[] words = str.split(" ");
+        Map<String, Boolean> keyMap = new HashMap<>();
+        keyMap.put("true",true);
+
     }
 }

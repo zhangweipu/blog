@@ -10,6 +10,8 @@ public class HelloProxy implements InvocationHandler {
 
     /**
      * 绑定对象
+     * 使用构造函数也可以
+     *
      * @param proxy
      * @return
      */
@@ -19,6 +21,17 @@ public class HelloProxy implements InvocationHandler {
                 this);
     }
 
+    //invoke在什么时候使用的
+
+    /**
+     * 执行目标对象的方法
+     *
+     * @param proxy
+     * @param method
+     * @param args
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         //目的是在这里，增加自己的操作

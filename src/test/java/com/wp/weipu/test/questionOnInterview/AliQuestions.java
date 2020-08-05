@@ -41,6 +41,7 @@ public class AliQuestions {
 
     public int getNum(int[] nums, int pre, int n, int sub) {
         if (sub == 0) {
+            //想返回 在这个地方还要完成复制
             return 1;
         }
         int num = 0;
