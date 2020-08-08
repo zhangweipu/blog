@@ -413,7 +413,95 @@ public class Simpleclass {
         String str = "true and false";
         String[] words = str.split(" ");
         Map<String, Boolean> keyMap = new HashMap<>();
-        keyMap.put("true",true);
+        keyMap.put("true", true);
 
+    }
+
+    /**
+     * 重建一棵二叉树
+     * 其中的一个节点放错位置了
+     * <p>
+     * 使用中序遍历
+     */
+    public void recoverTree(TreeNode root) {
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode x = null, y = null, pred = null;
+        stack.add(root);
+        while (stack.size() != 0) {
+            TreeNode tmp = stack.peek();
+            while (tmp.left != null) {
+                stack.add(tmp.left);
+                tmp = tmp.left;
+            }
+            tmp = stack.pop();
+            if (pred != null && tmp.val < pred.val) {
+                y = tmp;
+                if (x == null) {
+                    x = pred;
+                } else {
+                    break;
+                }
+            }
+            pred = tmp;
+            if (tmp.right != null) {
+                stack.add(tmp.right);
+            }
+        }
+        swap(x, y);
+    }
+
+    public void swap(TreeNode x, TreeNode y) {
+        int tmp = x.val;
+        x.val = y.val;
+        y.val = tmp;
+    }
+
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        //把这个也有container方法忘了
+        Set<String> wordSet = new HashSet<>(wordList);
+        //判断词是否在列表里
+        if (wordSet.size() == 0 || !wordSet.contains(endWord)) {
+            return 0;
+        }
+        int wordLen = beginWord.length();
+        //移除开头单词
+        wordSet.remove(beginWord);
+        //广度遍历的时候用
+        Queue<String> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+        int step = 1;
+        visited.add(beginWord);
+        while (!queue.isEmpty()) {
+            int currentSize = queue.size();
+            //依次遍历当前队列的单词
+            for (int i = 0; i < currentSize; i++) {
+                String word = queue.poll();
+                char[] charArray = word.toCharArray();
+                for (int j = 0; j < wordLen; j++) {
+                    //替换每个位置的字符
+                    char originChar = charArray[j];
+                    for (char k = 'a'; k <= 'z'; k++) {
+                        if (k == originChar) {
+                            continue;
+                        }
+                        charArray[j] = k;
+                        //这也不叫建图啊
+                        String nextWord = String.valueOf(charArray);
+                        if (wordSet.contains(nextWord)) {
+                            if (nextWord.equals(endWord)) {
+                                return step + 1;
+                            }
+                            if (!visited.contains(nextWord)) {
+                                queue.add(nextWord);
+                                visited.add(nextWord);
+                            }
+                        }
+                        charArray[j] = originChar;
+                    }
+                }
+            }
+            step++;
+        }
+        return 0;
     }
 }

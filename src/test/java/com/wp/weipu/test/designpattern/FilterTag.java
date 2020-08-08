@@ -1,4 +1,4 @@
-package com.wp.weipu.test.patterns;
+package com.wp.weipu.test.designpattern;
 
 import org.junit.Test;
 
