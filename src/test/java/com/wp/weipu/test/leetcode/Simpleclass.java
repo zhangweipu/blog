@@ -2,6 +2,7 @@ package com.wp.weipu.test.leetcode;
 
 import com.alibaba.fastjson.JSON;
 import com.sun.org.apache.bcel.internal.generic.LoadClass;
+import com.wp.weipu.test.Json;
 import org.junit.Test;
 
 import java.util.*;
@@ -503,5 +504,499 @@ public class Simpleclass {
             step++;
         }
         return 0;
+    }
+
+    /**
+     * 计算连续数的个数，组成一个列表。然后两两想比较，取最小的
+     *
+     * @param s
+     * @return
+     */
+    public int countBinarySubstring(String s) {
+        int n = s.length();
+        List<Integer> list = new ArrayList<>();
+        int i = 0;
+        //还可以用一个last代替，存结果的
+        while (i < n) {
+            char c = s.charAt(i);
+            int count = 0;
+            while (i < n && s.charAt(i) == c) {
+                ++i;
+                ++count;
+            }
+            list.add(count);
+        }
+        int ans = 0;
+        for (int j = 1; j < list.size(); j++) {
+            ans += Math.min(list.get(i), list.get(i - 1));
+        }
+        return ans;
+    }
+
+    /**
+     * 找到排序数组反转的点，同时这个点还要等于target
+     * O(logn)
+     * 二分查找试试
+     * 我从两边开始找试试
+     * 数组是两段升序，只要比较target的大小就可以确定在那一段了。。。。。
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int search(int[] nums, int target) {
+        if (nums.length == 0) {
+            return -1;
+        }
+        int i = 0, j = nums.length - 1;
+        int flag = 0;
+        while (i < j) {
+            if (i + 1 < j && nums[i] > nums[i + 1]) {
+                if (nums[i] == target) {
+                    return i;
+                } else if (nums[i + 1] == target) {
+                    return i + 1;
+                }
+                flag = 1;
+                break;
+            }
+            if (j - 1 > i && nums[j] < nums[j - 1]) {
+                if (nums[j] == target) {
+                    return j;
+                } else if (nums[j - 1] == target) {
+                    return j - 1;
+                }
+                flag = 2;
+                break;
+            }
+            i++;
+            j--;
+        }
+
+        //可能是有序的
+        if (flag == 0) {
+            if (nums[0] == target) {
+                return 0;
+            } else if (nums[nums.length - 1] == target) {
+                return nums.length - 1;
+            }
+        }
+        if (nums[i] == target) {
+            return i;
+        }
+        return -1;
+    }
+
+    public int search2(int[] nums, int target) {
+        int len = nums.length;
+        if (len == 0) {
+            return -1;
+        }
+        int i = 0, j = len - 1;
+        //在前半段
+        if (nums[0] <= target) {
+            while (i < len) {
+                if (target == nums[i]) {
+                    return i;
+                }
+                if (i < j && nums[i] > nums[i + 1]) {
+                    break;
+                }
+                i++;
+            }
+        } else {
+            while (j > 0) {
+                if (target == nums[j]) {
+                    return j;
+                }
+                if (j > 0 && nums[j] < nums[j - 1]) {
+                    break;
+                }
+                j--;
+            }
+        }
+        return -1;
+    }
+
+    @Test
+    public void test() {
+        int[] nums = new int[]{4, 5, 6, 7, 0, 1, 2};
+        System.out.println(search2(nums, 0));
+    }
+
+    /**
+     * 遍历矩阵的问题
+     *
+     * @param board
+     */
+    //四个方向
+//    int[][] move = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    public void solve(char[][] board) {
+        int col = board[0].length, row = board.length;
+        if (col < 1 || row < 1) {
+            return;
+        }
+        //游走索引
+//        int i = 1, j = row - 2;
+        for (int i = 1; i < row - 1; i++) {
+            for (int j = 1; j < col - 1; j++) {
+                if (board[i][j] == 'O') {
+                    if (isX(board, i, j)) {
+                        board[i][j] = 'X';
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 使用递归的放法
+     *
+     * @param board
+     * @param i
+     * @param j
+     * @return
+     */
+    public boolean isX(char[][] board, int i, int j) {
+        int col = board[0].length, row = board.length;
+        //任意一个到达边界
+        if ((i == row - 1 || j == col - 1 || i == 0 || j == 0) && board[i][j] == 'O') {
+            return false;
+        }
+        if (board[i][j] == 'X') {
+            return true;
+        }
+        //先占了
+
+        //向上
+        if (isX(board, i + 1, j) && isX(board, i, j - 1) && isX(board, i, j + 1)) {
+            board[i][j] = 'O';
+            return true;
+        } else {
+            board[i][j] = 'O';
+            return false;
+        }
+    }
+
+    @Test
+    public void test3() {
+        char[][] nums = new char[][]{{'X', 'X', 'X'}, {'X', 'O', 'X'}, {'X', 'X', 'X'}};
+        solve(nums);
+        System.out.println(JSON.toJSONString(nums));
+        if (false && false) {
+            System.out.println("sss");
+        }
+    }
+
+    /**
+     * 先重边界开始查找
+     *
+     * @param board
+     */
+    public void solve1(char[][] board) {
+        int row = board.length;
+        if (row == 0) {
+            return;
+        }
+        int col = board[0].length;
+        for (int i = 0; i < row; i++) {
+            dfs(board, i, 0);
+            dfs(board, i, col - 1);
+        }
+        for (int j = 0; j < col; j++) {
+            dfs(board, 0, j);
+            dfs(board, row - 1, j);
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (board[i][j] == '#') {
+                    board[i][j] = 'O';
+                } else if (board[i][j] == 'O') {
+                    board[i][j] = 'X';
+                }
+            }
+        }
+    }
+
+    public void dfs(char[][] board, int i, int j) {
+        int row = board.length;
+        int col = board[0].length;
+        if (i < 0 || j < 0 || i >= row || j >= col || board[i][j] == 'X' || board[i][j] == '#') {
+            return;
+        }
+        board[i][j] = '#';
+        dfs(board, i - 1, j);
+        dfs(board, i + 1, j);
+        dfs(board, i, j - 1);
+        dfs(board, i, j + 1);
+    }
+
+    /**
+     * 旋转数组，n*n的
+     * 先上下翻转，再对角翻转
+     *
+     * @param matrix
+     */
+    public void rotate(int[][] matrix) {
+        int row = matrix.length;
+        if (row == 1 || row == 0) {
+            return;
+        }
+        int i = 0, j = row - 1;
+        //上下翻转
+        while (i < j) {
+            for (int l = 0; l < row; l++) {
+                int tmp = matrix[i][l];
+                matrix[i][l] = matrix[j][l];
+                matrix[j][l] = tmp;
+            }
+            i++;
+            j--;
+        }
+        //对角翻转
+        for (int m = 0; m < row; m++) {
+            for (int n = m; n < row; n++) {
+                int tmp = matrix[m][n];
+                matrix[m][n] = matrix[n][m];
+                matrix[n][m] = tmp;
+            }
+        }
+    }
+
+    /**
+     * 四周旋转的办法
+     *
+     * @param matrix
+     */
+    public void rotate1(int[][] matrix) {
+        int n = matrix.length;
+        //明明一样的旋转
+        for (int i = 0; i < (n + 1) / 2; i++) {
+            for (int j = 0; j < n / 2; j++) {
+//                int temp = matrix[n - 1 - j][i];
+//                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1];
+//                matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 - i];
+//                matrix[j][n - 1 - i] = matrix[i][j];
+//                matrix[i][j] = temp;
+                //我这么想是错的
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[n - 1 - i][j];
+                matrix[n - 1 - i][j] = matrix[n - 1 - i][n - 1 - j];
+                matrix[n - 1 - i][n - 1 - j] = matrix[i][n - 1 - j];
+                matrix[i][n - 1 - j] = tmp;
+            }
+        }
+
+    }
+
+    @Test
+    public void test9() {
+        int[][] mat = new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        rotate1(mat);
+        System.out.println(JSON.toJSONString(mat));
+    }
+
+    /**
+     * 下一个最大的数
+     * 从后往前遍历，然后交换
+     *
+     * @param nums
+     */
+    public void nextPermutation(int[] nums) {
+        int n = nums.length;
+        //虽然对了一些用例但是还是不正确
+//        if (n == 0) {
+//            return;
+//        }
+//        while (n > 0) {
+//            n--;
+//            if (n > 0 && nums[n - 1] < nums[n]) {
+//                int tmp = nums[n - 1];
+//                nums[n - 1] = nums[n];
+//                nums[n] = tmp;
+//                break;
+//            }
+//        }
+//        if (n == 0) {
+//            Arrays.sort(nums);
+//        }
+        int i = 0, j = n - 1;
+        while (i < j) {
+            if (j > 0 && nums[j] < nums[j - 1]) {
+                j--;
+            }
+            if (i < n && nums[i] > nums[i + 1]) {
+                i++;
+            }
+        }
+        if (i == j) {
+            Arrays.sort(nums);
+            return;
+        }
+        //ij进行交换
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+
+    }
+
+    @Test
+    public void test10() {
+        int[] nums = new int[]{1, 3, 2};
+        nextPermutation(nums);
+        System.out.println(JSON.toJSONString(nums));
+    }
+
+    /**
+     * 先遍历树，获取到一号玩家的父亲节点和孩子节点
+     *
+     * @param root
+     * @param n
+     * @param x
+     * @return
+     */
+//    public boolean btreeGameWinningMove(TreeNode root, int n, int x) {
+//
+//    }
+//    public int dfs(TreeNode root){
+//
+//    }
+
+    /**
+     * 获取可能的字符串
+     * 怎么去重
+     *
+     * @return
+     */
+    public List<String> choose(int n, int m) {
+        int[] colored = new int[n + 1];
+//        int[] str = new int[m];
+        String sb = new String();
+        List<String> set = new ArrayList<>();
+        setNum(set, colored, sb, -1, n, 0, m);
+        Collections.sort(set);
+        return set;
+    }
+
+    //不能用数组存
+
+    /**
+     * 传的还是引用，值改变了，就相当于重新创建了一个对象
+     *
+     * @param set
+     * @param colored
+     * @param sb
+     * @param l
+     * @param n
+     * @param m
+     * @param len
+     */
+    public void setNum(List<String> set, int[] colored, String sb, int l, int n, int m, int len) {
+        //数组的length怎么算的
+//        String sb = str;
+        if (l != -1) {
+            sb = sb + l;
+        }
+        if (sb.length() == len) {
+            set.add(sb);
+//            str[m - 1] = 0;
+            return;
+        }
+        for (int i = 1; i <= n; i++) {
+            if (colored[i] != 1 && i > l) {
+                colored[i] = 1;
+                setNum(set, colored, sb, i, n, m + 1, len);
+                colored[i] = 0;
+            }
+        }
+    }
+
+    @Test
+    public void test13() {
+        List<String> s = choose(5, 2);
+        Collections.sort(s);
+        Iterator<String> i = s.iterator();
+        while (i.hasNext()) {
+            String dd = i.next();
+            System.out.println(dd);
+        }
+        int[] ss = {1, 2, 3};
+        System.out.println(ss.toString());
+    }
+
+
+    @Test
+    public void getM() {
+        int m = 4;
+        int count = 0;
+        while (m > 0) {
+            m = m >> 1;
+            count++;
+        }
+        System.out.println(count);
+        //右边是移位的位数
+        int l = 5 << 1;
+        System.out.println(l);
+    }
+
+    public void getNum(int[][] arr) {
+        int row = arr.length, col = arr[0].length;
+        int c = 0, c1 = Math.min(row, col) / 2 + 1;
+        System.out.println(row + "--" + col);
+        int count = 0;
+        int sum = row * col;
+        while (c < c1) {
+            //上从左到右
+            for (int i = c; count <= sum && i < col - c; i++) {
+                count++;
+                System.out.println(arr[c][i]);
+            }
+            System.out.println("----");
+            for (int i = c + 1; count <= sum && i < row - c; i++) {
+                count++;
+                System.out.println(arr[i][col - c - 1]);
+            }
+            System.out.println("----");
+            for (int i = col - c - 2; count <= sum && i >= c; i--) {
+                count++;
+                System.out.println(arr[row - c - 1][i]);
+            }
+            System.out.println("----");
+            for (int i = row - c - 2; count <= sum && i > c; i--) {
+                count++;
+                System.out.println(arr[i][c]);
+            }
+            System.out.println("----");
+            c++;
+        }
+    }
+
+    @Test
+    public void test19() {
+        int[][] arr = new int[][]{{1, 2, 3, 4}, {2, 3, 4, 6}, {8, 6, 4, 3}, {1, 2, 3, 4}, {5, 6, 7, 8}};
+        getNum(arr);
+    }
+
+    public void findNum(int[] arr, int begin, int end) {
+        if (begin > end) {
+            return;
+        }
+        int mid = (begin + end) / 2;
+        if (mid - 1 >= begin && mid + 1 <= end) {
+            if (arr[mid] > arr[mid - 1] && arr[mid] < arr[mid + 1]) {
+                findNum(arr, mid, end);
+            } else if (arr[mid] < arr[mid - 1] && arr[mid] > arr[mid + 1]) {
+                findNum(arr, begin, mid);
+            } else {
+                System.out.println(arr[mid]);
+            }
+        }
+    }
+
+    @Test
+    public void test40() {
+        int[] arr = new int[]{1, 2, 3, 5, 6, 7, 4, 7, 3, 2, 1};
+
+        findNum(arr, 0, arr.length - 1);
     }
 }

@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSON;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -227,6 +229,20 @@ public class Lambda {
                 new DemoTest("bai", "sss")).forEach(consumer);
         //序列化
         System.out.println(JSON.toJSONString(lis));
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void test13() {
+        int[] arr = new int[]{1, 2, 3, 4, 5};
+        AtomicInteger a = new AtomicInteger();
+        //这里用了并行所以需要用原子类吧
+        IntStream.range(0, 5).boxed().forEach(x -> {
+            System.out.println(arr[x]);
+            a.addAndGet(arr[x]);
+        });
     }
 
     public class DemoTest {
