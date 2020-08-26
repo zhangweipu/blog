@@ -1,4 +1,7 @@
-package com.wp.weipu.test.ReflectTest;
+package com.wp.weipu.test.designpattern.ReflectTest;
+
+
+import java.sql.Statement;
 
 public class ProxyTest {
     public static void main(String[] args) {

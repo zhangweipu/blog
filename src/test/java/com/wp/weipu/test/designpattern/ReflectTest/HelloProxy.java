@@ -1,4 +1,4 @@
-package com.wp.weipu.test.ReflectTest;
+package com.wp.weipu.test.designpattern.ReflectTest;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -1,4 +1,4 @@
-package com.wp.weipu.test.ReflectTest;
+package com.wp.weipu.test.designpattern.ReflectTest;
 
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;

@@ -6,6 +6,7 @@ import com.wp.weipu.test.Json;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.concurrent.Executors;
 
 /**
  * leetcode中简单的题
@@ -949,24 +950,17 @@ public class Simpleclass {
             //上从左到右
             for (int i = c; count <= sum && i < col - c; i++) {
                 count++;
-                System.out.println(arr[c][i]);
             }
-            System.out.println("----");
             for (int i = c + 1; count <= sum && i < row - c; i++) {
                 count++;
-                System.out.println(arr[i][col - c - 1]);
             }
-            System.out.println("----");
             for (int i = col - c - 2; count <= sum && i >= c; i--) {
                 count++;
-                System.out.println(arr[row - c - 1][i]);
             }
-            System.out.println("----");
             for (int i = row - c - 2; count <= sum && i > c; i--) {
                 count++;
                 System.out.println(arr[i][c]);
             }
-            System.out.println("----");
             c++;
         }
     }
@@ -996,7 +990,46 @@ public class Simpleclass {
     @Test
     public void test40() {
         int[] arr = new int[]{1, 2, 3, 5, 6, 7, 4, 7, 3, 2, 1};
+        Integer e = new Integer(1);
+        System.out.println(1 * 3 == 3);
+    }
 
-        findNum(arr, 0, arr.length - 1);
+    /**
+     * 合并区间。。。
+     * 数组是排序完的吗
+     * 需要全排列吗
+     *
+     * @param intervals
+     * @return
+     */
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length == 0) {
+            return new int[0][0];
+        }
+        //这个我咋就记不住呢
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+        int i = 1, len = intervals.length;
+        List<int[]> list = new ArrayList<>();
+        while (i <= len) {
+            //进行合并
+            int[] a = intervals[i - 1];
+            int right = a[1];
+            int left = a[0];
+            while (i < len && right >= intervals[i][0]) {
+                right = Math.max(intervals[i][1], right);
+                i++;
+            }
+            list.add(new int[]{left, right});
+            i++;
+        }
+
+        return list.toArray(new int[0][]);
+    }
+
+    @Test
+    public void test91() {
+        int[][] m = new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}};
+        merge(m);
+
     }
 }

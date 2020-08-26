@@ -1,4 +1,4 @@
-package com.wp.weipu.test.ReflectTest;
+package com.wp.weipu.test.designpattern.ReflectTest;
 
 public class HelloImpl implements HelloInterface {
     @Override
