@@ -60,6 +60,7 @@ public class GLD {
         return Arrays.stream(arr).sum();
     }
 
+
     @Test
     public void test2() {
         int[] arr = new int[]{2, 2, 2, 101};
@@ -491,5 +492,91 @@ public class GLD {
 
         System.out.println(JSON.toJSONString(d));
         reserve("abc .");
+    }
+
+    /**
+     * 二分查找
+     *
+     * @param nums
+     * @return
+     */
+    public long getBalance(int[] nums) {
+        long l = 0, r = nums[0] + nums[1] + nums[2] + nums[3];
+        while (l < r) {
+            long mid = l + (r + 1) / 2;
+            if (balance(mid, nums)) {
+                l = mid + 1;
+            } else {
+                r = mid;
+            }
+        }
+        //怎么能返回-1的
+        return 4 * (l - 1);
+    }
+
+    public boolean balance(long mid, int[] nums) {
+        long p = 0, q = 0;
+        for (int i = 0; i < 4; i++) {
+            if (nums[i] - mid >= 0) {
+                p += nums[i] - mid;
+            } else {
+                q += nums[i] - mid;
+            }
+        }
+        return p + 2 * q >= 0;
+    }
+
+    /**
+     * 标记法
+     *
+     * @param nums
+     * @return
+     */
+    public int firstMissingPosition(int[] nums) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] <= 0) {
+                nums[i] = n + 1;
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            int num = Math.abs(nums[i]);
+            if (nums[i] < n) {
+                nums[num - 1] = -Math.abs(nums[num - 1]);
+            }
+        }
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) {
+                return i + 1;
+            }
+        }
+        return n + 1;
+    }
+
+    /**
+     * 使用动态规划做
+     *
+     * @param nums
+     * @return
+     */
+    public  boolean PredictTheWinner(int[] nums) {
+        int n = nums.length;
+        int i = 0, j = n - 1;
+        int a = 0, b = 0;
+        while (i < j) {
+            if (nums[i] > nums[j]) {
+                a += nums[i];
+                b += nums[j];
+            } else {
+                a += nums[j];
+                b += nums[i];
+            }
+            i++;
+            j--;
+        }
+        if (n % 2 != 0) {
+            a += nums[i];
+        }
+        return a >= b ? true : false;
     }
 }

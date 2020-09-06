@@ -1,8 +1,6 @@
 package com.wp.weipu.test.leetcode;
 
 import com.alibaba.fastjson.JSON;
-import com.sun.org.apache.bcel.internal.generic.LoadClass;
-import com.wp.weipu.test.Json;
 import org.junit.Test;
 
 import java.util.*;
@@ -1031,5 +1029,44 @@ public class Simpleclass {
         int[][] m = new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}};
         merge(m);
 
+    }
+
+    /**
+     * 判断不连续的子序列
+     *
+     * @param s
+     * @param t
+     * @return
+     */
+    public boolean isSubsequence(String s, String t) {
+        int tLen = t.length();
+        int sLen = s.length();
+        if (sLen > tLen) {
+            return false;
+        }
+        int sIndex = 0;
+        for (char t1 : t.toCharArray()) {
+            if (sIndex < sLen && t1 == s.charAt(sIndex)) {
+                sIndex++;
+            }
+            if (sIndex == sLen) {
+                break;
+            }
+        }
+        if (sIndex == sLen) {
+            return true;
+        }
+        return false;
+    }
+
+    @Test
+    public void test16() {
+        String s = "abcd";
+        String t = "ahbgdc";
+        if (isSubsequence(s, t)) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
     }
 }

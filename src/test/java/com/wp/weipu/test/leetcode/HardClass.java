@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * 难度级别为难的
@@ -131,4 +132,99 @@ public class HardClass {
         List<List<Integer>> res = fourSum(nums, 0);
         System.out.println(JSON.toJSONString(res));
     }
+
+    //移动的方向
+    int[][] dirs = new int[][]{{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    //这个为什么设为全局的
+    int rows, cols;
+
+    /**
+     * 遍历出矩阵，最长的增长序列
+     *
+     * @param matrix
+     * @return
+     */
+    public int longestIncreasingPath(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return 0;
+        }
+        rows = matrix.length;
+        cols = matrix[0].length;
+        int ans = 0;
+        int[][] memo = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                ans = Math.max(ans, dfs(matrix, i, j, memo));
+            }
+        }
+        return ans;
+    }
+
+    public int dfs(int[][] matrix, int row, int col, int[][] memo) {
+        //说明被访问过了，并且本次访问晚于上次，就说明肯定短
+        if (memo[row][col] != 0) {
+            return memo[row][col];
+        }
+        //访问加1
+        ++memo[row][col];
+        //分别从四个方向进行遍历
+        for (int[] dir : dirs) {
+            int newRow = dir[0] + row, newCol = col + dir[1];
+            if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < rows && matrix[row][col] < matrix[newRow][newCol]) {
+                //这个我觉得不合理啊。。。。 只是路径和这是根据最先访问的位置的数
+                memo[row][col] = Math.max(memo[row][col], dfs(matrix, newRow, newCol, memo) + 1);
+            }
+        }
+        return memo[row][col];
+    }
+
+    /**
+     * 使用递归试试
+     *
+     * @param head
+     * @param k
+     * @return
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        //我先计数
+        ListNode pre = new ListNode(-1);
+        ListNode t, tmp = head;
+        int i = 0;
+
+        //怎么判断不够k了呢
+        while (i < k && tmp != null) {
+            i++;
+            t = tmp.next;
+            tmp.next = pre.next;
+            pre.next = tmp;
+            tmp = t;
+        }
+        head.next = reverseKGroup(tmp, k);
+        return pre.next;
+    }
+
+    /**
+     * 不带头节点反转链表
+     *
+     * @param head
+     * @return
+     */
+    public ListNode reverse(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode pre = head, next = head.next;
+        while (next != null) {
+            ListNode tmp = next.next;
+            pre.next = null;
+            next.next = pre;
+            pre = next;
+            next = tmp;
+        }
+        return pre;
+    }
+
 }
