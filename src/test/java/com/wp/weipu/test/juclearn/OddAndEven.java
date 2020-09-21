@@ -1,6 +1,9 @@
 package com.wp.weipu.test.juclearn;
 
-import org.junit.internal.runners.statements.RunAfters;
+
+import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class OddAndEven {
 
@@ -13,7 +16,6 @@ public class OddAndEven {
     public void odd(Runnable oddPrint) throws InterruptedException {
         while (num > 0) {
             synchronized (this) {
-
                 if (num % 2 == 0) {
                     oddPrint.run();
                     num--;
@@ -46,6 +48,7 @@ public class OddAndEven {
         Thread eve = new Thread("thread1") {
             public void run() {
                 try {
+                    //多线程的执行方法。。。
                     oe.even(new Even());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -62,7 +65,6 @@ public class OddAndEven {
                 }
             }
         };
-
         eve.start();
         odd.start();
         eve.join();

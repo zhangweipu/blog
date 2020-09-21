@@ -65,7 +65,6 @@ public class EventQueue {
                 e.printStackTrace();
             }
         }).start();
-        ;
 
 
     }

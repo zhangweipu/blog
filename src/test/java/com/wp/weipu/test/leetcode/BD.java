@@ -92,6 +92,8 @@ public class BD {
     }
 
     /**
+     * 这是干啥的来着
+     *
      * @param n
      * @param k
      * @return
@@ -255,11 +257,11 @@ public class BD {
 //        System.arraycopy(arr, 4, arr, 3, 1);
 //        List<Integer> lis = Collections.synchronizedList(new ArrayList<>());
 //        System.out.println(JSON.toJSONString(arr));
-        String a= "12";
-        String b="13";
-        long a1=Long.parseLong(a);
-        long b1=Long.parseLong(b);
-        System.out.println(a1+b1);
+        String a = "12";
+        String b = "13";
+        long a1 = Long.parseLong(a);
+        long b1 = Long.parseLong(b);
+        System.out.println(a1 + b1);
 
     }
 

@@ -74,4 +74,8 @@ public class ZJ1 {
         }
         return 0;
     }
+
+    public void singleStack(int[] arr){
+
+    }
 }
