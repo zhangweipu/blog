@@ -21,6 +21,7 @@ public class BooleanLock implements Lock {
                 blockList.add(currentThread());
                 this.wait();
             }
+            //没添加吧
             blockList.remove(currentThread());
             this.locked = true;
             this.currentThread = currentThread();

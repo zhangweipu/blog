@@ -2,6 +2,8 @@ package com.wp.weipu.test.leetcode;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class JS {
@@ -60,8 +62,7 @@ public class JS {
     @Test
     public void test() {
         int[] arr = {3, 5, 6, -1, -1, 2, 7, -1, -1, 4, -1, -1, 1, 9, -1, -1, 8, -1, -1};
-        List<Integer> lis= new LinkedList<>();
-        
+        List<Integer> lis = new LinkedList<>();
 
 
     }
@@ -70,12 +71,176 @@ public class JS {
         int val;
         JSTree left;
         JSTree right;
+
         public JSTree(int val) {
             this.val = val;
         }
-       public JSTree() {
 
-       }
+        public JSTree() {
+
+        }
     }
+
+    @Test
+    public void test6() {
+        String[] s1 = new String[]{"1101", "1010", "1111", "1110"};
+        String[] s2 = new String[]{"ABCD", "EFGH", "IJKL", "MNPQ"};
+        rotatePassword(s1, s2);
+    }
+
+    public String rotatePassword(String[] s1, String[] s2) {
+        // write code here
+        int n = s1.length;
+        StringBuilder sb = new StringBuilder();
+        char[][] mima = new char[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                mima[i][j] = s1[i].charAt(j);
+            }
+        }
+        appendStr(sb, mima, s2);
+        char[][] two = computeIndex(mima);
+        appendStr(sb, two, s2);
+        char[][] three = computeIndex(two);
+        appendStr(sb, three, s2);
+        char[][] four = computeIndex(three);
+        appendStr(sb, four, s2);
+        return sb.toString();
+    }
+
+    public void appendStr(StringBuilder sb, char[][] mat, String[] a2) {
+        int n = mat.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (mat[i][j] == '0') {
+                    sb.append(a2[i].charAt(j));
+                }
+            }
+        }
+    }
+
+    //计算坐标的旋转
+    public char[][] computeIndex(char[][] arr) {
+        int n = arr.length;
+        char[][] mat = new char[n][n];
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                mat[i][j] = arr[j][i];
+            }
+        }
+        return mat;
+    }
+
+
+    public Interval solve(int n, int k, String str1, String str2) {
+        // write code here
+        Interval inter = new Interval();
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            if (str1.charAt(i) == str2.charAt(i)) {
+                sum++;
+            }
+        }
+        if (sum <= k) {
+            inter.start = sum;
+        }
+        inter.end = sum + (n - k);
+        return inter;
+    }
+
+    @Test
+    public void test3() {
+        Interval aa = solve(3, 3, "ABC", "ABC");
+        System.out.println(aa.start);
+        System.out.println(aa.end);
+    }
+
+    public class Interval {
+        int start;
+        int end;
+    }
+
+    public static int isPlindRome(int num) {
+        StringBuilder sb = new StringBuilder();
+        while (num != 0) {
+            if ((num & 1) == 1) {
+                sb.append(1);
+            } else {
+                sb.append(0);
+            }
+            num >>>= 1;
+        }
+        if (sb.toString().equals(sb.reverse().toString())) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    @Test
+    public void test8() {
+        int[] nums = new int[]{6, 2, 3, 3, 3, 4};
+        System.out.println(canBeEqual(nums));
+    }
+
+    /**
+     * 给定6个人了
+     *
+     * @param nums
+     * @return
+     */
+    public int canBeEqual(int[] nums) {
+        int n = nums.length;
+//        int total = Arrays.stream(nums).sum();
+        int total=0;
+        for (int k:nums){
+            total+=k;
+        }
+        if (total % 2 != 0) {
+            return 0;
+        }
+        Arrays.sort(nums);
+        int target = total / 2;
+        int i = 0, j = n - 1;
+        while (i < j) {
+            int k = i + 1;
+            int sub = target - nums[i] - nums[j];
+            if (sub < 0) {
+                j--;
+                continue;
+            }
+            while (k < j && sub > nums[k]) {
+                k++;
+            }
+            if (sub == nums[k]) {
+                return 1;
+            }
+            i++;
+        }
+        return 0;
+    }
+
+    public double xiangNong(String str) {
+        Map<Character, Double> map = new HashMap<>();
+        int n = str.length();
+        for (int i = 0; i < str.length(); i++) {
+            map.merge(str.charAt(i), 1.0, Double::sum);
+        }
+        double ans = 0;
+        for (Map.Entry<Character, Double> entry : map.entrySet()) {
+            double l = entry.getValue() / n;
+            ans += Math.log(l)/Math.log(2) * l;
+        }
+        //小数保留。。。
+        BigDecimal bg = new BigDecimal(ans).setScale(2, RoundingMode.DOWN);
+        return -bg.doubleValue();
+    }
+
+    @Test
+    public void test7() {
+        System.out.println(xiangNong("AABB"));
+    }
+
 
 }

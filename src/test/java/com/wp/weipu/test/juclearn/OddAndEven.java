@@ -1,7 +1,9 @@
 package com.wp.weipu.test.juclearn;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -33,6 +35,7 @@ public class OddAndEven {
             synchronized (this) {
 
                 if (num % 2 != 0) {
+                    //任务创建之后，调用一次执行一次。。而线程只是切换任务。。
                     evenPrint.run();
                     num--;
                     this.notify();
@@ -48,7 +51,7 @@ public class OddAndEven {
         Thread eve = new Thread("thread1") {
             public void run() {
                 try {
-                    //多线程的执行方法。。。
+                    //多线程的执行方法。。。//这个任务会一直执行
                     oe.even(new Even());
                 } catch (InterruptedException e) {
                     e.printStackTrace();

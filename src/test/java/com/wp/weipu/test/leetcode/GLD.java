@@ -12,8 +12,21 @@ import java.util.*;
 /**
  * 广联达的笔试
  */
-public class GLD {
+public class GLD extends JS{
 
+    private int aa;
+
+
+    /**
+     *
+     * @param i
+     */
+    public GLD(int i){
+
+    }
+    public GLD(){
+        this(20);
+    }
     public int dance(String a, String b) {
         int len = a.length();
         int sum = 0;
