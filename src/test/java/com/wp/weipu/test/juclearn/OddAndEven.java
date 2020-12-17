@@ -17,7 +17,7 @@ public class OddAndEven {
 
     public void odd(Runnable oddPrint) throws InterruptedException {
         while (num > 0) {
-            synchronized (this) {
+            synchronized (OddAndEven.class) {
                 if (num % 2 == 0) {
                     oddPrint.run();
                     num--;

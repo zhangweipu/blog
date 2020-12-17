@@ -15,6 +15,7 @@ public class Semaphore2 {
 
     public void first(Runnable printFirst) {
         printFirst.run();
+        //release会加一吗
         two.release();
     }
 
