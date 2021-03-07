@@ -1,5 +1,7 @@
 package com.wp.weipu.test.review.leetcodebook.array;
 
+import com.wp.weipu.test.leetcode.LNode;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -75,5 +77,22 @@ public class Array1 {
             midRight = Math.min(nums1[midNums1], nums2[midNums2]);
         }
         return (midLeft + midRight) >> 1;
+    }
+
+    /**
+     * 原地反转链表
+     *
+     * @param head
+     * @return
+     */
+    public LNode reverseList(LNode head) {
+        LNode cur = head, pre = null;
+        while (cur != null) {
+            LNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
     }
 }
