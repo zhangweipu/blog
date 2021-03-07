@@ -3,6 +3,9 @@ package com.wp.weipu.controller.admin;
 import com.wp.weipu.common.base.ResultBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +23,17 @@ import java.io.IOException;
  */
 @Controller
 public class HelloController {
-    private static final Logger logger= LoggerFactory.getLogger(HelloController.class);
+    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
+
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    @Autowired 
+    StringRedisTemplate stringRedisTemplate;
 
     @RequestMapping("/hello2")
     public String hello2() throws IOException, ServletException {
-
+        redisTemplate.opsForValue().set(1, "ddd");
 //        System.out.println(request.getContextPath());
 //        System.out.println(request.getRequestURI());
 //        System.out.println(request.getAuthType());
@@ -43,8 +52,8 @@ public class HelloController {
     }
 
     @RequestMapping("/hello")
-    public String hello(Model model){
-        model.addAttribute("test","hello world");
+    public String hello(Model model) {
+        model.addAttribute("test", "hello world");
         return "index";
     }
 }

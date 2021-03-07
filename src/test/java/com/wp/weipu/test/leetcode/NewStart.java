@@ -1084,6 +1084,22 @@ public class NewStart {
     }
 
     /**
+     * 任何数和 00 做异或运算，结果仍然是原来的数，即 a \oplus 0=aa⊕0=a。
+     * 任何数和其自身做异或运算，结果是 00，即 a \oplus a=0a⊕a=0。
+     * 异或运算满足交换律和结合律，即 a \oplus b \oplus a=b \oplus a \oplus a=b \oplus (a \oplus a)=b \oplus0=ba⊕b⊕a=b⊕a⊕a=b⊕(a⊕a)=b⊕0=b。
+     *
+     * @param nums
+     * @return
+     */
+    public int singleNumber2(int[] nums) {
+        int res = 0;
+        for (int n : nums) {
+            res ^= n;
+        }
+        return res;
+    }
+
+    /**
      * 无重复子集
      *
      * @param nums
@@ -1097,8 +1113,8 @@ public class NewStart {
         ans.add(sub);
         for (int i = 0; i < n; i++) {
 //            for (int j = 0; j < n; j++) {
-                sub = new LinkedList<>();
-                getSub(i + 1, nums, 0, sub);
+            sub = new LinkedList<>();
+            getSub(i + 1, nums, 0, sub);
 //            }
         }
         return ans;
@@ -1121,6 +1137,65 @@ public class NewStart {
         int[] t = new int[]{1, 2, 3};
         List<List<Integer>> ans = subsets1(t);
         System.out.println(JSON.toJSONString(ans));
+    }
+
+    /**
+     * 秋叶收藏集
+     * 采用一个二维数组，分别存前面的，中间的，最右边的
+     *
+     * @param leaves
+     * @return
+     */
+    public int minimumOperations(String leaves) {
+        int len = leaves.length();
+        char[] leave = leaves.toCharArray();
+        int[][] dp = new int[len][3];
+        //如果第一个是y需要改成r，增加一步
+        dp[0][0] = leave[0] == 'y' ? 1 : 0;
+        //置成无效
+        dp[0][1] = dp[0][2] = dp[1][2] = Integer.MAX_VALUE;
+        int isYellow = 0;//判断 当前叶子是不是黄色
+        for (int i = 1; i < len; i++) {
+            isYellow = leave[i] == 'y' ? 1 : 0;
+            dp[i][0] = dp[i - 1][0] + isYellow;
+            dp[i][1] = Math.min(dp[i - 1][0], dp[i - 1][1] + (1 - isYellow));
+            if (i > 1) {
+                dp[i][2] = Math.min(dp[i - 1][1], dp[i - 1][2] + isYellow);
+            }
+        }
+        return dp[len - 1][2];
+    }
+
+    /**
+     * 最大矩形
+     * 我这样写不一定对
+     *  
+     *
+     * @param matrix
+     * @return
+     */
+    public int maximalRectangle(char[][] matrix) {
+        int m = matrix.length, n = matrix[0].length;
+        int[][] mat = new int[m + 1][n + 1];
+        if (matrix[0][0] == '1') {
+            mat[0][0] = 1;
+        }
+        int max = 0;
+        int isOne = 0;
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                isOne = matrix[i][j] == '1' ? 1 : 0;
+                if (matrix[i][j - 1] == '1' && matrix[i - 1][j] == '1') {
+                    if (isOne == 1) {
+                        mat[i][j] = mat[i - 1][j - 1] + 1;
+                    } else {
+                        mat[i][j] = 0;
+                    }
+                }
+                max = Math.max(max, mat[i][j]);
+            }
+        }
+        return max;
     }
 
 }

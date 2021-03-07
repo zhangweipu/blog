@@ -5,6 +5,7 @@ import org.junit.Test;
 import javax.validation.constraints.Min;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * 新的开始
@@ -726,6 +727,189 @@ public class EnjoyArg {
         System.out.println(wordPattern("abba",
                 "dog dog dog dog"));
     }
+
+    /**
+     * 只要大于成本就卖出
+     * 便宜了就买近，涨了就卖，
+     *
+     * @param prices
+     * @param fee
+     * @return
+     */
+    public int maxProfit(int[] prices, int fee) {
+        //计算成本
+        int buy = prices[0] + fee;
+        int total = 0;
+        for (int i = 1; i < prices.length; i++) {
+            //这个时候可以买了
+            if (prices[i] + fee < buy) {
+                buy = prices[i] + fee;
+                //下面这步会较早的发生
+            } else if (prices[i] > buy) {
+                total += prices[i] - buy;
+                buy = prices[i];
+            }
+        }
+        return total;
+    }
+
+    /**
+     * 找不同
+     *
+     * @param s
+     * @param t
+     * @return
+     */
+    public char findTheDifference(String s, String t) {
+        char[] ss = s.toCharArray();
+        char[] tt = t.toCharArray();
+        Arrays.sort(ss);
+        Arrays.sort(tt);
+        for (int i = 0; i < ss.length; i++) {
+            if (ss[i] != tt[i]) {
+                return tt[i];
+            }
+        }
+        return tt[ss.length];
+    }
+
+    /**
+     * 秋叶收藏
+     * 怎么改才能次数最小
+     * 动态规划啊
+     * 不会的的的的
+     * 看答案都看不懂。。。。。。。。。。。。。。。。。。。。。。。。。
+     *
+     * @param leaves
+     * @return
+     */
+    public int minimumOperations(String leaves) {
+        if (leaves == null || "".equals(leaves)) {
+            return 0;
+        }
+        int length = leaves.length();
+        char[] chars = leaves.toCharArray();
+        /**
+         * 状态数组，state[i][j]
+         *          i表示终止下标
+         *          j表示：0为左半边，1为中间部分，2为右半边
+         * state[i][j]表示从0到i需要调整的叶子数
+         */
+        int[][] state = new int[length][3];
+        /**
+         * 记录 已知状态数组元素
+         * 1、第一个叶子，必须是左半部分。所以只需判断是不是 黄色叶子 即可
+         * 2、第一个叶子，必须是左半部分。所以state[0][1]和state[0][2]都是无效的
+         * 3、第二个叶子，可以是左半部分，也可以是中间部分，但是不能是右半部分，因此state[1][2]是无效的
+         * 恍然大悟的感觉，我的键盘手感可以
+         */
+        state[0][0] = chars[0] == 'y' ? 1 : 0;
+        state[0][1] = state[0][2] = state[1][2] = Integer.MAX_VALUE;
+        //判断当前遍历的叶子是不是黄色
+        int isYellow = 0;
+        //遍历原叶子集
+        for (int i = 1; i < length; i++) {
+            isYellow = chars[i] == 'y' ? 1 : 0;
+            state[i][0] = state[i - 1][0] + isYellow;
+            state[i][1] = Math.min(state[i - 1][0], state[i - 1][1]) + (1 - isYellow);
+            if (i > 1) {
+                //右半部分 的叶子 必须是第2个元素之后的元素
+                state[i][2] = Math.min(state[i - 1][1], state[i - 1][2]) + isYellow;
+            }
+        }
+        /**
+         * 最终结果为 state[length-1][2]
+         * 因为state[i][j]最终的结果为i必须
+         */
+        return state[length - 1][2];
+    }
+
+    /**
+     * 九十度选择矩阵，并且是原地
+     * 先用两个矩阵试试
+     *
+     * @param matrix
+     */
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        int[][] temp = new int[n][n];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                temp[n - i - 1][j] = matrix[i][j];
+            }
+        }
+    }
+
+    /**
+     * 去除重复字母
+     * 还要保证有序
+     *
+     * @param s
+     * @return
+     */
+    public String removeDuplicateLetters(String s) {
+        //这是干啥的
+        boolean[] vis = new boolean[26];
+        int[] nums = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            nums[s.charAt(i) - 'a']++;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!vis[ch - 'a']) {
+                while (sb.length() > 0 && sb.charAt(sb.length() - 1) > ch) {
+                    if (nums[sb.charAt(sb.length() - 1) - 'a'] > 0) {
+                        vis[sb.charAt(sb.length() - 1) - 'a'] = false;
+                        sb.deleteCharAt(sb.length() - 1);
+                    } else {
+                        break;
+                    }
+                }
+                vis[ch - 'a'] = true;
+                sb.append(ch);
+            }
+            nums[ch - 'a'] -= 1;
+        }
+        return sb.toString();
+    }
+
+    public String removeDuplicateLetters1(String s) {
+        LinkedList<Character> deque = new LinkedList<>();
+        int[] count = new int[26];
+        boolean[] exists = new boolean[26];
+        //初始化
+        for (char ch : s.toCharArray()) {
+            count[ch - 'a']++;
+        }
+        //遍历s并入栈
+        for (int i = 0; i < s.length(); i++) {
+            char temp = s.charAt(i);
+            if (!exists[temp - 'a']) {
+                //好像懂了一些，要确定后面还存不存在比这个更大的数，所以加了一个count
+                while (!deque.isEmpty() && deque.getLast() > temp && count[deque.getLast() - 'a'] > 0) {
+                    exists[deque.getLast() - 'a'] = false;
+                    deque.removeLast();
+                }
+                deque.add(temp);
+                exists[temp - 'a'] = true;
+            }
+            count[temp - 'a']--;
+        }
+        //返回
+        StringBuilder sb = new StringBuilder();
+        for (char ch : deque) {
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+
+    @Test
+    public void test67() {
+        String aa = removeDuplicateLetters("cbeacdcbc");
+        System.out.println(aa);
+    }
+
 }
 
 

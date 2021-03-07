@@ -191,9 +191,9 @@
             <optional>true</optional>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>com.oracle</groupId>-->
-            <!--<artifactId>ojdbc6</artifactId>-->
-            <!--<version>${ojdbc.version}</version>-->
+        <!--<groupId>com.oracle</groupId>-->
+        <!--<artifactId>ojdbc6</artifactId>-->
+        <!--<version>${ojdbc.version}</version>-->
         <!--</dependency>-->
         <!--mapper-->
         <dependency>
@@ -319,7 +319,7 @@
                 <version>${mybatis.generator.version}</version>
                 <configuration>
                     <configurationFile>${basedir}/src/main/resources/generator/generatorConfig-mysql.xml
-                    <!--<configurationFile>${basedir}/src/main/resources/generator/generatorConfig-oracle.xml-->
+                        <!--<configurationFile>${basedir}/src/main/resources/generator/generatorConfig-oracle.xml-->
                     </configurationFile>
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>

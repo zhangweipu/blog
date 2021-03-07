@@ -11,7 +11,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 @EnableConfigurationProperties
 public class WeipuApplication extends SpringBootServletInitializer{
 	private static final Logger logger= LoggerFactory.getLogger(WeipuApplication.class);
