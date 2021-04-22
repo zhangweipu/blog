@@ -37,7 +37,7 @@
         <targetXMLPackage>mapper</targetXMLPackage>
 
         <mapper.version>3.5.0</mapper.version>
-        <mybatis.version>3.4.4</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <mybatis.spring.version>1.3.1</mybatis.spring.version>
         <mybatis.generator.version>1.3.6</mybatis.generator.version>
         <jackson.version>2.9.4</jackson.version>
