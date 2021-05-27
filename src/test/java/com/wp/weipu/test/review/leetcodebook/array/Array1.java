@@ -1,9 +1,9 @@
 package com.wp.weipu.test.review.leetcodebook.array;
 
 import com.wp.weipu.test.leetcode.LNode;
+import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Array1 {
     /**
@@ -94,5 +94,180 @@ public class Array1 {
             cur = next;
         }
         return pre;
+    }
+
+    /**
+     * 131. 分割回文串
+     * 使用深度遍历 加 动态规划的方式
+     *
+     * @param s
+     * @return
+     */
+    List<List<String>> ret = new ArrayList<>();
+    boolean[][] f;
+    List<String> ans = new ArrayList<String>();
+
+    public List<List<String>> partition(String s) {
+        int n = s.length();
+        //先用动态规划求回文串
+        f = new boolean[n][n];
+        for (boolean[] ff : f) {
+            Arrays.fill(ff, true);
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i + 1; j < n; j++) {
+                f[i][j] = s.charAt(i) == s.charAt(j) && f[i + 1][j - 1];
+            }
+        }
+        dfs(s, 0);
+        return ret;
+    }
+
+    public void dfs(String s, int i) {
+        if (i == s.length()) {
+            ret.add(new ArrayList<>(ans));
+        }
+        for (int j = i; j < s.length(); j++) {
+            if (f[i][j]) {
+                ans.add(s.substring(i, j + 1));
+                dfs(s, j + 1);
+                ans.remove(ans.size() - 1);
+            }
+        }
+    }
+
+    /**
+     * 856. 括号的分数
+     *
+     * @param S
+     * @return
+     */
+    public int scoreOfParentheses(String S) {
+        int sum = 0;
+        Stack<Integer> stack = new Stack<>();
+        //第0层
+        stack.push(0);
+        for (char c : S.toCharArray()) {
+            if (c == '(') {
+                stack.push(0);
+            } else {
+                int v = stack.pop();
+                int m = stack.pop();
+                stack.push(m + Math.max(2 * v, 1));
+            }
+        }
+        return stack.pop();
+    }
+
+    /**
+     * 1047. 删除字符串中的所有相邻重复项
+     *
+     * @param S
+     * @return
+     */
+    public String removeDuplicates(String S) {
+        StringBuilder sb = new StringBuilder();
+        int top = -1;
+        for (char c : S.toCharArray()) {
+            if (top >= 0 && sb.charAt(top) == c) {
+                sb.deleteCharAt(top);
+                top--;
+            } else {
+                sb.append(c);
+                top++;
+            }
+        }
+        return sb.toString();
+    }
+
+    @Test
+    public void test1() {
+        String aa = "abbaca";
+        System.out.println(removeDuplicates(aa));
+    }
+
+    /**
+     * 227. 基本计算器 II
+     *
+     * @param s
+     * @return
+     */
+    public int calculate(String s) {
+        Deque<Integer> stack = new LinkedList<>();
+        char preSign = '+';
+        int num = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char cur = s.charAt(i);
+            //不全是个位数
+            if (Character.isDigit(cur)) {
+                num = num * 10 + (cur - '0');
+            }
+            if (!Character.isDigit(cur) && cur != ' ' || i == s.length() - 1) {
+                if (preSign == '+') {
+                    stack.push(num);
+                } else if (preSign == '-') {
+                    stack.push(-num);
+                } else if (preSign == '*') {
+                    stack.push(stack.pop() * num);
+                } else if (preSign == '/') {
+                    stack.push(stack.pop() / num);
+                }
+                preSign = cur;
+                num = 0;
+            }
+        }
+        int res = 0;
+        while (!stack.isEmpty()) {
+            res += stack.pop();
+        }
+        return res;
+    }
+
+    /**
+     * LCP 22. 黑白方格画
+     *
+     * @param n
+     * @param k
+     * @return
+     */
+    public int paintingPlan(int n, int k) {
+        if (k < n) {
+            return 0;
+        }
+        if (k == n * n) {
+            return 1;
+        }
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i * n + j * (n - i) == k) {
+                    res += combine(i, n) * combine(j, n);
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 排列组合的计算
+     *
+     * @param m
+     * @param n
+     * @return
+     */
+    public int combine(int m, int n) {
+        if (m == 0) {
+            return 1;
+        }
+        int x = 1, y = 1, z = n - m + 1;
+        while (n >= z) {
+            x *= n;
+            n--;
+        }
+        while (m >= 1) {
+            y *= m;
+            m--;
+        }
+        return x / y;
     }
 }

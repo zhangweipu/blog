@@ -17,7 +17,7 @@ public class SinglePattern {
 }
 
 class SinglePatternSyn {
-    //双重加锁
+    //双重加锁，是这样的吗 双重if判断
     private volatile static SinglePatternSyn instance = null;
 
     private SinglePatternSyn() {

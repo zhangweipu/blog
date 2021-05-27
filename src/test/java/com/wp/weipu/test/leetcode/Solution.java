@@ -397,6 +397,38 @@ public class Solution {
         }
     }
 
+    /**
+     * LCP 33. 蓄水
+     *
+     * @param bucket
+     * @param vat
+     * @return
+     */
+    public int storeWater(int[] bucket, int[] vat) {
+        int max = 0;
+        for (int v : vat) {
+            if (max < v) {
+                max = v;
+            }
+        }
+        if (max == 0) {
+            return 0;
+        }
+        int n = bucket.length;
+        int ans = Integer.MAX_VALUE;
+        //遍历倒水次数
+        for (int i = 1; i <= 10000; i++) {
+            int per = 0;
+            int cur = i;
+            for (int j = 0; j < n; j++) {
+                per = (vat[j] + i - 1);
+                cur += Math.max(0, per - bucket[j]);
+            }
+            ans = Math.min(ans, cur);
+        }
+        return ans;
+    }
+
     public void shift(int[] nums, int i, int j) {
         int low = i, cur = 2 * i;
         int tmp = nums[i];
