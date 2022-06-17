@@ -46,7 +46,7 @@
         <mapstruct.version>1.2.0.Final</mapstruct.version>
         <flyway-core.version>5.0.3</flyway-core.version>
         <pagehelper.version>4.2.1</pagehelper.version>
-        <fastjson.version>1.2.33</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <ojdbc.version>11.2.0.1.0</ojdbc.version>
         <mysql.connector.version>5.1.30</mysql.connector.version>
         <quartz.version>2.2.1</quartz.version>
