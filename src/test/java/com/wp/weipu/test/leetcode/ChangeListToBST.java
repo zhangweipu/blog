@@ -27,6 +27,7 @@ public class ChangeListToBST {
         }
         //找到中间节点就行了
         ListNode fast = head, slow = head, pre = slow;
+
         //如果链表只有两个的情况。。。
         while (fast.next != null && fast.next.next != null) {
             pre = slow;

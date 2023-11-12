@@ -32,11 +32,6 @@ public class GetObjectName {
 
     @Test
     public void test() throws NoSuchFieldException {
-        DemoT demoT=new DemoT();
-        demoT.setAge(3);
-        demoT.setName("tom");
-
-        System.out.printf(demoT.getClass().getDeclaredField("name").getName());
-
+        System.out.println("weiPUshos ");
     }
 }

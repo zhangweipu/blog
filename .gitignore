@@ -27,3 +27,11 @@
 mvnw
 mvnw.cmd
 /log
+.DS_Store
+.idea/*
+.mvn/*
+HELP.md
+item/
+mvnw
+mvnw.cmd
+target/
